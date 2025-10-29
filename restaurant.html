@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant - Eco House Mancora</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter (body) and Poppins (headings) fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
+    <!-- Load Feather Icons -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Apply Poppins to headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+         main section .font-black { /* Banner headings */
+             font-weight: 900;
+         }
+         main h2, footer h3 { /* Section titles */
+            font-weight: 700;
+         }
+         main h3, main h4 { /* Card/item titles */
+            font-weight: 600;
+         }
+
+        /* Active nav link style */
+        .nav-link.active, .nav-link-mobile.active {
+            color: #0c4a6e; /* Tailwind cyan-900 */
+            font-weight: 500;
+        }
+         .nav-link-mobile.active {
+             background-color: #f0f9ff; /* cyan-50 */
+         }
+
+        /* Hero text shadow for readability */
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Specific styles for Restaurant Testimonials */
+        #restaurant-testimonials blockquote::before {
+             content: '\201C'; /* Left double quotation mark */
+             font-size: 4rem;
+             color: #a5f3fc; /* Light cyan */
+             position: absolute;
+             left: -0.5rem;
+             top: -1.5rem;
+             line-height: 1;
+        }
+
+        /* Fade in animation for page content */
+        main > section {
+             animation: fadeIn 0.4s ease-out;
+        }
+         @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 w-full">
+        <nav>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="home.html" class="nav-link" data-page="home">
+                            <h1 class="text-2xl font-bold text-gray-900">Eco House <span class="text-cyan-700">Mancora</span></h1>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation - Links updated -->
+                    <div class="hidden md:flex md:items-center md:space-x-6">
+                        <a href="home.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="home">Home</a>
+                        <a href="accommodation.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="accommodation">Accommodation</a>
+                        <a href="surf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="surf">Surf</a>
+                        <a href="kitesurf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="kitesurf">Kitesurf</a>
+                        <a href="yoga.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="yoga">Yoga</a>
+                        <a href="restaurant.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="restaurant">Restaurant</a>
+                        <a href="location.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="location">Location</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="contact">Contact</a>
+                    </div>
+
+                    <!-- Book Now (Desktop) -->
+                    <div class="hidden md:block">
+                        <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                            Book Now
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg id="hamburger-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu - Links updated -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed top-20 left-0 w-full h-[calc(100vh-80px)] overflow-y-auto transform -translate-x-full z-40">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="home.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="home">Home</a>
+                    <a href="accommodation.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="accommodation">Accommodation</a>
+                    <a href="surf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="surf">Surf</a>
+                    <a href="kitesurf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="kitesurf">Kitesurf</a>
+                    <a href="yoga.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="yoga">Yoga</a>
+                    <a href="restaurant.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="restaurant">Restaurant</a>
+                    <a href="location.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="location">Location</a>
+                    <a href="contact.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="contact">Contact</a>
+                </div>
+                <!-- Book Now (Mobile) -->
+                <div class="px-5 py-6">
+                    <a href="#" class="block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- =================== -->
+        <!-- RESTAURANT PAGE (ENHANCED) -->
+        <!-- =================== -->
+        <section id="restaurant" class="bg-gray-50"> 
+            <!-- Page Banner -->
+            <div class="relative bg-gray-900 h-48 md:h-64 flex items-center justify-center text-center text-white overflow-hidden">
+                <img src="https://placehold.co/1600x400/d946ef/FFFFFF?text=Restaurant" 
+                     loading="lazy"
+                     onerror="this.src='https://placehold.co/1600x400/333/FFF?text=Image+Missing'"
+                     alt="Fresh ceviche dish" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-50">
+                <div class="relative z-10 p-4">
+                    <h2 class="text-4xl md:text-5xl font-black hero-text-shadow uppercase tracking-wider">
+                        Nourish Your Body
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <p class="text-xl text-center text-gray-600 max-w-3xl mx-auto -mt-4 mb-16">Our on-site restaurant and bar, "Nourish," is the heart of our hotel. We believe that good food is a key part of a good life, blending fresh Peruvian ingredients with healthy international flavors.</p>
+
+                    <!-- START: NEW Culinary Philosophy Highlights -->
+                     <div class="mb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center max-w-6xl mx-auto">
+                         <div class="flex flex-col items-center">
+                             <img src="https://placehold.co/400x400/10b981/FFFFFF?text=Local+Produce" loading="lazy" onerror="this.src='https://placehold.co/400x400/10b981/FFF?text=Local'" alt="Fresh local produce" class="w-40 h-40 rounded-full object-cover shadow-lg mb-4">
+                             <h4 class="text-xl font-semibold text-gray-800 mb-1">Hyper-Local</h4>
+                             <p class="text-gray-600 text-sm">Sourced daily from nearby farms and fishermen for peak freshness.</p>
+                         </div>
+                         <div class="flex flex-col items-center">
+                             <img src="https://placehold.co/400x400/d946ef/FFFFFF?text=Peruvian+Flavors" loading="lazy" onerror="this.src='https://placehold.co/400x400/d946ef/FFF?text=Peru'" alt="Classic ceviche dish" class="w-40 h-40 rounded-full object-cover shadow-lg mb-4">
+                              <h4 class="text-xl font-semibold text-gray-800 mb-1">Authentic Peruvian</h4>
+                              <p class="text-gray-600 text-sm">Celebrating vibrant local cuisine like fresh ceviche and lomo saltado.</p>
+                         </div>
+                         <div class="flex flex-col items-center">
+                            <img src="https://placehold.co/400x400/f59e0b/FFFFFF?text=Healthy+&+Vibrant" loading="lazy" onerror="this.src='https://placehold.co/400x400/f59e0b/FFF?text=Healthy'" alt="Colorful smoothie bowl" class="w-40 h-40 rounded-full object-cover shadow-lg mb-4">
+                             <h4 class="text-xl font-semibold text-gray-800 mb-1">Healthy & Vibrant</h4>
+                             <p class="text-gray-600 text-sm">Fuel your adventures with poke bowls, fresh juices, and smoothie bowls.</p>
+                         </div>
+                          <div class="flex flex-col items-center">
+                            <img src="https://placehold.co/400x400/3b82f6/FFFFFF?text=Ocean+View+Dining" loading="lazy" onerror="this.src='https://placehold.co/400x400/3b82f6/FFF?text=View'" alt="Restaurant table overlooking the ocean" class="w-40 h-40 rounded-full object-cover shadow-lg mb-4">
+                             <h4 class="text-xl font-semibold text-gray-800 mb-1">Ocean View Dining</h4>
+                             <p class="text-gray-600 text-sm">Enjoy delicious meals and stunning sunsets with panoramic Pacific views.</p>
+                         </div>
+                     </div>
+                    <!-- END: NEW Culinary Philosophy Highlights -->
+
+                    <!-- Philosophy (Existing Text) - Combined into "Local, Fresh, Sustainable" title -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden p-8 md:p-12 mb-16">
+                        <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">Local, Fresh, Sustainable</h2>
+                        <p class="text-lg text-center text-gray-600 max-w-3xl mx-auto mb-10">Our menu is a celebration of Peru's incredible bounty. We work directly with local farmers and fishermen to source the freshest ingredients daily, creating dishes that are both delicious and responsible.</p>
+                        <!-- Menu Highlights -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-700 text-center border-t border-gray-200 pt-8">
+                            <div>
+                                <strong class="font-medium text-gray-900 block text-lg mb-1">Breakfast</strong>
+                                <p class="text-sm">Smoothie bowls, avocado toast, Peruvian coffee, and fresh-squeezed juices. Included with your stay!</p>
+                            </div>
+                            <div>
+                                <strong class="font-medium text-gray-900 block text-lg mb-1">Lunch & Dinner</strong>
+                                <p class="text-sm">Fresh ceviche, fish tacos, quinoa salads, lomo saltado, wood-fired pizzas, and daily specials.</p>
+                            </div>
+                            <div>
+                                <strong class="font-medium text-gray-900 block text-lg mb-1">The Bar</strong>
+                                <p class="text-sm">Pisco sours, chilcanos, craft beers, wine selection, and healthy non-alcoholic elixirs.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- START: NEW Signature Dishes -->
+                     <div class="mb-20">
+                         <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Signature Dishes</h2>
+                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                             <!-- Dish 1 -->
+                             <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
+                                 <img src="https://placehold.co/600x400/d946ef/FFFFFF?text=Classic+Ceviche" loading="lazy" onerror="this.src='https://placehold.co/600x400/d946ef/FFF?text=Ceviche'" alt="Classic Ceviche" class="w-full h-48 object-cover">
+                                 <div class="p-4 flex flex-col flex-grow">
+                                     <h4 class="text-lg font-semibold mb-1">Classic Ceviche</h4>
+                                     <p class="text-sm text-gray-600 flex-grow">Fresh catch of the day marinated in lime juice, spiced with aji limo chili, red onions, and cilantro.</p>
+                                 </div>
+                             </div>
+                             <!-- Dish 2 -->
+                             <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
+                                 <img src="https://placehold.co/600x400/f59e0b/FFFFFF?text=Lomo+Saltado" loading="lazy" onerror="this.src='https://placehold.co/600x400/f59e0b/FFF?text=Lomo'" alt="Lomo Saltado" class="w-full h-48 object-cover">
+                                  <div class="p-4 flex flex-col flex-grow">
+                                     <h4 class="text-lg font-semibold mb-1">Lomo Saltado</h4>
+                                     <p class="text-sm text-gray-600 flex-grow">Traditional Peruvian stir-fry with tender beef strips, onions, tomatoes, soy sauce, and french fries.</p>
+                                 </div>
+                             </div>
+                              <!-- Dish 3 -->
+                             <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
+                                 <img src="https://placehold.co/600x400/10b981/FFFFFF?text=Quinoa+Bowl" loading="lazy" onerror="this.src='https://placehold.co/600x400/10b981/FFF?text=Bowl'" alt="Quinoa Bowl" class="w-full h-48 object-cover">
+                                  <div class="p-4 flex flex-col flex-grow">
+                                     <h4 class="text-lg font-semibold mb-1">Andean Quinoa Bowl</h4>
+                                     <p class="text-sm text-gray-600 flex-grow">Nutrient-packed bowl with organic quinoa, avocado, seasonal roasted vegetables, and a passion fruit vinaigrette.</p>
+                                 </div>
+                             </div>
+                              <!-- Dish 4 -->
+                             <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col">
+                                 <img src="https://placehold.co/600x400/ef4444/FFFFFF?text=Fish+Tacos" loading="lazy" onerror="this.src='https://placehold.co/600x400/ef4444/FFF?text=Tacos'" alt="Fish Tacos" class="w-full h-48 object-cover">
+                                  <div class="p-4 flex flex-col flex-grow">
+                                     <h4 class="text-lg font-semibold mb-1">Baja Fish Tacos</h4>
+                                     <p class="text-sm text-gray-600 flex-grow">Crispy battered fish, shredded cabbage, pico de gallo, and chipotle crema on warm corn tortillas.</p>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <!-- END: NEW Signature Dishes -->
+
+                    <!-- Gallery (Existing) -->
+                    <h2 class="text-3xl font-bold text-center text-gray-900 mb-8">A Taste of Nourish</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
+                        <img src="https://placehold.co/400x400/d946ef/FFFFFF?text=Fresh+Ceviche" loading="lazy" onerror="this.src='https://placehold.co/400x400/d946ef/FFF?text=Food+1'" alt="Fresh ceviche dish" class="rounded-xl shadow-md w-full h-full object-cover aspect-square">
+                        <img src="https://placehold.co/400x400/d946ef/FFFFFF?text=Pisco+Sour" loading="lazy" onerror="this.src='https://placehold.co/400x400/d946ef/FFF?text=Food+2'" alt="Pisco sour cocktail" class="rounded-xl shadow-md w-full h-full object-cover aspect-square">
+                        <img src="https://placehold.co/400x400/d946ef/FFFFFF?text=Restaurant+Ambiance" loading="lazy" onerror="this.src='https://placehold.co/400x400/d946ef/FFF?text=Food+3'" alt="Restaurant ambiance at sunset" class="rounded-xl shadow-md w-full h-full object-cover aspect-square">
+                        <img src="https://placehold.co/400x400/d946ef/FFFFFF?text=Smoothie+Bowl" loading="lazy" onerror="this.src='https://placehold.co/400x400/d946ef/FFF?text=Food+4'" alt="Breakfast smoothie bowl" class="rounded-xl shadow-md w-full h-full object-cover aspect-square">
+                    </div>
+
+                    <!-- START: NEW The Nourish Experience Snippet -->
+                    <div class="my-16 text-center max-w-3xl mx-auto">
+                         <i data-feather="coffee" class="w-12 h-12 text-purple-600 mx-auto mb-4"></i>
+                         <h3 class="text-3xl font-bold text-gray-900 mb-4">The Nourish Experience</h3>
+                         <p class="text-lg text-gray-600">
+                             Enjoy a relaxed breakfast after your morning surf, savor fresh ceviche for lunch with your feet sandy, or watch the sunset over the Pacific with a Pisco Sour in hand. Nourish is your vibrant hub for delicious food and good company right here at Eco House.
+                         </p>
+                    </div>
+                    <!-- END: NEW The Nourish Experience Snippet -->
+
+                     <!-- START: NEW Restaurant Testimonials Section -->
+                    <div id="restaurant-testimonials" class="py-20 bg-purple-50 rounded-xl my-20"> <!-- Added background color -->
+                        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">What Our Diners Say</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                                <!-- Testimonial 1 -->
+                                <div class="relative bg-white p-8 rounded-xl shadow-lg border-l-4 border-purple-600">
+                                    <blockquote class="text-lg text-gray-700 italic leading-relaxed">
+                                        "Incredible food at Nourish restaurant! Some of the best ceviche I had in Peru, so fresh. Plus, the included breakfast was delicious and healthy every morning. Views are amazing too!"
+                                    </blockquote>
+                                    <cite class="block mt-4 text-right font-medium text-gray-800">
+                                        - Maria G.
+                                        <span class="block text-sm font-normal text-gray-500">Guest from Peru</span>
+                                    </cite>
+                                </div>
+                                <!-- Testimonial 2 -->
+                                <div class="relative bg-white p-8 rounded-xl shadow-lg border-l-4 border-amber-500">
+                                    <blockquote class="text-lg text-gray-700 italic leading-relaxed">
+                                        "Loved the vibe at Nourish. Perfect spot for sunset cocktails after a kite session. The Pisco Sours were top-notch, and the staff were super friendly. Great place to hang out."
+                                    </blockquote>
+                                    <cite class="block mt-4 text-right font-medium text-gray-800">
+                                        - Kevin M.
+                                        <span class="block text-sm font-normal text-gray-500">Guest from USA</span>
+                                    </cite>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END: NEW Restaurant Testimonials Section -->
+
+                    <!-- START: NEW Enhanced Call to Action Section -->
+                     <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl shadow-xl overflow-hidden mt-16">
+                         <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+                             <!-- Text Column -->
+                             <div class="p-8 md:p-12 text-center md:text-left order-2 md:order-1"> <!-- Text on left -->
+                                 <h2 class="text-3xl font-bold mb-4">Taste the Flavors of Mancora</h2>
+                                 <p class="text-lg max-w-2xl mx-auto md:mx-0 mb-8">
+                                    Join us at Nourish for breakfast, lunch, dinner, or sunset drinks. Reservations recommended for dinner, especially during high season.
+                                 </p>
+                                 <div class="flex flex-col sm:flex-row justify-center md:justify-start items-center gap-4">
+                                     <a href="contact.html" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-purple-700 bg-white hover:bg-gray-100 transition duration-150 ease-in-out">
+                                        Make a Reservation
+                                     </a>
+                                     <a href="#" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 border border-white text-base font-medium rounded-xl shadow-sm text-white bg-white/10 hover:bg-white/20 transition duration-150 ease-in-out">
+                                         View Full Menu (Link TBA)
+                                     </a>
+                                 </div>
+                             </div>
+                             <!-- Image Column -->
+                             <div class="order-1 md:order-2"> <!-- Image on right for desktop -->
+                                 <img src="https://placehold.co/800x600/c026d3/FFFFFF?text=Sunset+Cocktail"
+                                      loading="lazy"
+                                      onerror="this.src='https://placehold.co/800x600/c026d3/FFF?text=Dine+With+Us'"
+                                      alt="Cocktail at sunset overlooking the ocean"
+                                      class="w-full h-64 md:h-full object-cover">
+                             </div>
+                         </div>
+                     </div>
+                    <!-- END: NEW Enhanced Call to Action Section -->
+
+                     <!-- Removed simple CTA -->
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer - Links updated -->
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Eco House Mancora</h3>
+                    <p class="text-sm">Your eco-friendly home for surf, kitesurf, and yoga in the heart of Peru's northern coast. Adventure and relaxation await.</p>
+                    <p class="text-sm mt-4 flex items-start">
+                        <i data-feather="heart" class="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0" style="margin-top: 0.125rem;"></i>
+                        <span>We proudly donate 1% of our benefits to Ocean Protection NGO's.</span>
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accommodation.html" class="nav-link text-sm hover:text-white" data-page="accommodation">Accommodation</a></li>
+                        <li><a href="restaurant.html" class="nav-link text-sm hover:text-white" data-page="restaurant">Restaurant</a></li>
+                        <li><a href="location.html" class="nav-link text-sm hover:text-white" data-page="location">Location</a></li>
+                    </ul>
+                </div>
+                <!-- Experiences -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Experiences</h3>
+                    <ul class="space-y-2">
+                        <li><a href="surf.html" class="nav-link text-sm hover:text-white" data-page="surf">Surf</a></li>
+                        <li><a href="kitesurf.html" class="nav-link text-sm hover:text-white" data-page="kitesurf">Kitesurf</a></li>
+                        <li><a href="yoga.html" class="nav-link text-sm hover:text-white" data-page="yoga">Yoga</a></li>
+                    </ul>
+                </div>
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="nav-link text-sm hover:text-white" data-page="contact">Contact Us</a></li>
+                        <!-- Social Icons -->
+                        <li class="flex items-center space-x-3 pt-1"> 
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Instagram</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.067-.06-1.407-.06-4.123v-.08c0-2.643.012-2.987.06-4.043.049 1.064.218 1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Facebook</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
+                            </a>
+                        </li>
+                         <li class="pt-2">
+                             <span class="text-sm text-cyan-200">Tripadvisor Travellers' Choice</span>
+                             <!-- Tripadvisor Placeholder -->
+                         </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
+                <p>&copy; <span id="current-year"></span> Eco House Mancora. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =================== -->
+    <!-- JAVASCRIPT LOGIC   -->
+    <!-- =================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            function openMobileMenu() {
+                if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.remove('hidden', '-translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                    hamburgerIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            function closeMobileMenu() {
+                 if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.add('-translate-x-full');
+                    mobileMenu.classList.remove('translate-x-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300); // Wait for transition
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                 }
+            }
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isMenuOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    if (isMenuOpen) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            } else {
+                console.error("Mobile menu button not found.");
+            }
+
+             // --- Mobile Nav Link Click Logic ---
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenuButton && mobileMenuButton.getAttribute('aria-expanded') === 'true') {
+                        closeMobileMenu();
+                    }
+                });
+            });
+
+            // --- Set Active Nav Link Based on URL ---
+            const currentPage = window.location.pathname.split('/').pop() || 'home.html'; 
+            const pageName = currentPage.replace('.html', ''); 
+            
+            const desktopLinks = document.querySelectorAll('header .hidden.md\\:flex a.nav-link');
+            const mobileLinks = document.querySelectorAll('#mobile-menu a.nav-link-mobile');
+
+            function setActiveLink(links) {
+                links.forEach(link => {
+                    const linkPage = link.dataset.page;
+                    // Highlight if the link's data-page matches the current page name
+                    if (linkPage === pageName || (pageName === 'home' && linkPage === 'home') ) { 
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+            setActiveLink(desktopLinks);
+            setActiveLink(mobileLinks);
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if(currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+            
+            // Initialize Feather Icons
+            function initializeFeatherIcons() {
+                try {
+                    if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                        feather.replace();
+                    } else {
+                        setTimeout(() => {
+                             if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                                 feather.replace();
+                             } else {
+                                  console.error("Feather icons library (feather) not loaded after delay.");
+                             }
+                        }, 500);
+                    }
+                } catch (e) {
+                    console.error("Feather icons failed to initialize:", e);
+                }
+            }
+            
+            initializeFeatherIcons(); // Call it once on load
+        });
+    </script>
+
+</body>
+</html>
+
