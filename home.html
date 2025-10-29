@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco House Mancora - Surf, Kitesurf & Yoga Hotel</title>
-    <!-- Load Tailwind CSS - REMOVED defer -->
+    <!-- Updated Title -->
+    <title>La Maison Eco House - Surf, Kitesurf & Yoga Hotel</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Inter (body) and Poppins (headings) fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
-    <!-- Load Feather Icons (for location icons) -->
-    <script src="https://unpkg.com/feather-icons" defer></script> <!-- Keep defer on Feather, it's fine -->
+    <!-- Load Feather Icons -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
     <style>
         /* Base styles */
         body {
-            font-family: 'Inter', sans-serif; /* Keep Inter for body */
+            font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -23,32 +24,25 @@
         /* Apply Poppins to headings */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
-            font-weight: 700; /* Default bold for Poppins headings */
+            font-weight: 700;
         }
-        /* Make Hero/Banner heading extra bold */
-         #home h2.font-black, main section .font-black {
-             font-weight: 900; /* Use Poppins Black for hero */
+         main section .font-black { /* Banner headings */
+             font-weight: 900;
          }
-         /* Make section titles bold */
-         main h2, footer h3 {
-            font-weight: 700; /* Poppins Bold */
+         main h2, footer h3 { /* Section titles */
+            font-weight: 700;
          }
-         /* Make card/item titles semi-bold */
-         main h3, main h4 {
-            font-weight: 600; /* Poppins SemiBold */
+         main h3, main h4 { /* Card/item titles */
+            font-weight: 600;
          }
-
 
         /* Active nav link style */
-        /* This can be simplified, or we can add a new JS snippet to check the current page URL */
-        .nav-link.active {
+        .nav-link.active, .nav-link-mobile.active {
             color: #0c4a6e; /* Tailwind cyan-900 */
             font-weight: 500;
         }
          .nav-link-mobile.active {
-             color: #0c4a6e; /* Tailwind cyan-900 */
              background-color: #f0f9ff; /* cyan-50 */
-             font-weight: 500;
          }
 
         /* Hero text shadow for readability */
@@ -61,53 +55,54 @@
             transition: transform 0.3s ease-in-out;
         }
 
-        /* No longer needed for SPA */
-        /*
-        main > section {
-            display: none; 
-            animation: fadeIn 0.4s ease-out;
-        }
-        main > section.active {
-            display: block; 
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        */
-
-        /* Dropdown style (if needed in future) */
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
         /* Basic Testimonial Slider Styles */
         .testimonial-slide {
-            display: none; /* Hide slides by default */
+            display: none;
             transition: opacity 0.5s ease-in-out;
-             position: absolute; /* Needed for positioning */
-             inset: 0; /* Make slides fill container */
-             padding-left: 1rem; /* Adjust padding if arrows overlap text */
+             position: absolute;
+             inset: 0;
+             padding-left: 1rem;
              padding-right: 1rem;
              opacity: 0;
         }
         .testimonial-slide.active-slide {
-            display: block; /* Show active slide */
+            display: block;
             opacity: 1;
-             position: relative; /* Make active slide take space */
+             position: relative;
         }
-
-        /* Specific styles for Accommodation Testimonials */
-        /* Note: This ID won't be on this page, but fine to keep */
-        #accommodation-testimonials blockquote::before {
-             content: '\201C'; /* Left double quotation mark */
-             font-size: 4rem;
-             color: #a5f3fc; /* Light cyan */
-             position: absolute;
-             left: -0.5rem;
-             top: -1.5rem;
-             line-height: 1;
+        
+        /* Photo Grid Overlay */
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
         }
+        .photo-card img {
+            transition: transform 0.3s ease;
+        }
+        .photo-card:hover img {
+            transform: scale(1.05);
+        }
+        .photo-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.1)); /* Darker at bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Align text to bottom */
+            padding: 1.5rem; /* p-6 */
+            color: white;
+        }
+         .photo-card-overlay h4 {
+             font-weight: 700; /* Poppins Bold */
+             font-size: 1.25rem; /* text-xl */
+             margin-bottom: 0.5rem; /* mb-2 */
+         }
+          .photo-card-overlay p {
+             font-size: 0.875rem; /* text-sm */
+             line-height: 1.4;
+         }
 
     </style>
 </head>
@@ -120,13 +115,13 @@
                 <div class="flex justify-between items-center h-20">
                     <!-- Logo -->
                     <div class="flex-shrink-0">
-                        <!-- Updated link to point to home.html -->
+                        <!-- Updated link to point to home.html, Updated Name -->
                         <a href="home.html" class="nav-link" data-page="home">
-                            <h1 class="text-2xl font-bold text-gray-900">Eco House <span class="text-cyan-700">Mancora</span></h1>
+                            <h1 class="text-2xl font-bold text-gray-900">La Maison <span class="text-cyan-700">Eco House</span></h1>
                         </a>
                     </div>
 
-                    <!-- Desktop Navigation - UPDATED LINKS -->
+                    <!-- Desktop Navigation - UPDATED LINKS, ADDED FAQ -->
                     <div class="hidden md:flex md:items-center md:space-x-6">
                         <a href="home.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="home">Home</a>
                         <a href="accommodation.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="accommodation">Accommodation</a>
@@ -136,9 +131,10 @@
                         <a href="restaurant.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="restaurant">Restaurant</a>
                         <a href="location.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="location">Location</a>
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="contact">Contact</a>
+                        <a href="faq.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="faq">FAQ</a> <!-- Added FAQ Link -->
                     </div>
 
-                    <!-- Book Now (Desktop) - Updated rounded corner -->
+                    <!-- Book Now (Desktop) -->
                     <div class="hidden md:block">
                         <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
                             Book Now
@@ -160,7 +156,7 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu - UPDATED LINKS -->
+            <!-- Mobile Menu - UPDATED LINKS, ADDED FAQ -->
             <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed top-20 left-0 w-full h-[calc(100vh-80px)] overflow-y-auto transform -translate-x-full z-40">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                     <a href="home.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="home">Home</a>
@@ -171,8 +167,9 @@
                     <a href="restaurant.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="restaurant">Restaurant</a>
                     <a href="location.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="location">Location</a>
                     <a href="contact.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="contact">Contact</a>
+                    <a href="faq.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="faq">FAQ</a> <!-- Added FAQ Link -->
                 </div>
-                <!-- Book Now (Mobile) - Updated rounded corner -->
+                <!-- Book Now (Mobile) -->
                 <div class="px-5 py-6">
                     <a href="#" class="block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
                         Book Now
@@ -188,17 +185,18 @@
         <!-- =================== -->
         <!--     HOME PAGE       -->
         <!-- =================== -->
-        <section id="home"> <!-- Removed 'active' class, no longer needed -->
+        <section id="home">
             <!-- 1. Hero Section -->
             <div class="relative bg-gray-900 h-[70vh] md:h-[90vh] flex items-center justify-center text-center text-white overflow-hidden">
-                <img src="https://placehold.co/1600x900/000000/FFFFFF?text=Eco+House+Hero+Image+(Surf/Yoga/Kite)" 
+                <img src="https://placehold.co/1600x900/000000/FFFFFF?text=La+Maison+Eco+House+Hero" 
                      loading="lazy"
                      onerror="this.src='https://placehold.co/1600x900/333/FFF?text=Hero+Image+Missing'"
-                     alt="Aerial view of Eco House Mancora with surfing and yoga" 
+                     alt="Aerial view of La Maison Eco House with surfing and yoga" 
                      class="absolute inset-0 w-full h-full object-cover opacity-60">
                 <div class="relative z-10 p-4">
                     <h2 class="text-4xl md:text-6xl font-black hero-text-shadow uppercase tracking-wider">Your Eco-Friendly Escape</h2>
-                    <p class="mt-4 text-xl md:text-2xl font-light hero-text-shadow max-w-3xl mx-auto">Surf, Kitesurf, and Yoga on the stunning coast of Mancora, Peru. Your adventure begins at the Eco House.</p>
+                     <!-- Updated Name -->
+                    <p class="mt-4 text-xl md:text-2xl font-light hero-text-shadow max-w-3xl mx-auto">Surf, Kitesurf, and Yoga on the stunning coast of Mancora, Peru. Your adventure begins at La Maison Eco House.</p>
                     <a href="#" class="mt-8 inline-block bg-cyan-700 text-white text-lg font-medium px-10 py-4 rounded-xl shadow-lg hover:bg-cyan-800 transition duration-300">
                         Check Availability
                     </a>
@@ -253,7 +251,7 @@
                 </div>
             </div>
 
-            <!-- 3. The Eco House Intro -->
+            <!-- 3. The Eco House Intro - Updated Name -->
             <div class="py-20 bg-green-50"> 
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -263,7 +261,7 @@
                                 Our Philosophy
                             </span>
                             <h2 class="text-3xl font-bold text-gray-900 mt-4 mb-4">More Than a Hotel. An Eco House.</h2>
-                            <p class="text-lg text-gray-600 mb-6">We built Eco House Mancora with sustainability at our core. Our construction uses recycled and local materials, minimizing impact while maximizing your connection with nature. We believe in conscious travel, where adventure and responsibility go hand-in-hand.</p>
+                            <p class="text-lg text-gray-600 mb-6">We built La Maison Eco House with sustainability at our core. Our construction uses recycled and local materials, minimizing impact while maximizing your connection with nature. We believe in conscious travel, where adventure and responsibility go hand-in-hand.</p>
                              <p class="text-lg text-gray-600">Learn more about our commitment on the <a href="accommodation.html" class="nav-link font-medium text-cyan-700 hover:text-cyan-900" data-page="accommodation">Accommodation</a> page.</p>
                         </div>
                         <div class="rounded-xl shadow-xl overflow-hidden">
@@ -392,27 +390,42 @@
                 </div>
             </div>
 
-            <!-- 6. Enhanced Location Highlight Section -->
+            <!-- 6. Enhanced Location Highlight Section - UPDATED WITH IMAGES -->
             <div class="py-20 bg-amber-50 text-center"> 
                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                    <h2 class="text-3xl font-bold text-gray-900 mb-4">Perfectly Placed for Peace & Play</h2>
                    <p class="text-lg text-gray-600 mb-10">
                        Nestled in tranquil Las Pocitas, we offer a peaceful retreat just steps from the action.
                    </p>
-                   <!-- Location Icons -->
-                   <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10">
+                   <!-- Location Highlights with Images -->
+                   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 items-start"> <!-- Changed sm:grid-cols-3 to md:grid-cols-3 and added items-start -->
                        <div class="flex flex-col items-center">
-                            <i data-feather="wind" class="w-10 h-10 text-cyan-700 mb-2"></i> 
+                            <!-- Image Placeholder -->
+                            <img src="https://placehold.co/200x200/db2777/FFFFFF?text=Kitesurf+Beach" 
+                                 loading="lazy" 
+                                 onerror="this.src='https://placehold.co/200x200/CCC/FFF?text=Kite'" 
+                                 alt="Kitesurf spot right out front" 
+                                 class="w-40 h-40 rounded-full object-cover shadow-lg mb-4"> <!-- Added rounded-full, size, shadow -->
                             <h4 class="font-semibold text-gray-800">Kitesurf Spot</h4>
                             <p class="text-gray-600">Right Out Front (10 steps!)</p>
                        </div>
                        <div class="flex flex-col items-center">
-                            <i data-feather="anchor" class="w-10 h-10 text-cyan-700 mb-2"></i> 
+                            <!-- Image Placeholder -->
+                             <img src="https://placehold.co/200x200/0891b2/FFFFFF?text=Surf+Break" 
+                                 loading="lazy" 
+                                 onerror="this.src='https://placehold.co/200x200/CCC/FFF?text=Surf'" 
+                                 alt="Main surf break nearby" 
+                                 class="w-40 h-40 rounded-full object-cover shadow-lg mb-4">
                             <h4 class="font-semibold text-gray-800">Main Surf Break</h4>
                             <p class="text-gray-600">Easy 5-Min Walk</p>
                        </div>
                        <div class="flex flex-col items-center">
-                            <i data-feather="coffee" class="w-10 h-10 text-cyan-700 mb-2"></i> 
+                            <!-- Image Placeholder -->
+                             <img src="https://placehold.co/200x200/f59e0b/FFFFFF?text=Mancora+Cafe" 
+                                 loading="lazy" 
+                                 onerror="this.src='https://placehold.co/200x200/CCC/FFF?text=Town'" 
+                                 alt="Cafes in Mancora town" 
+                                 class="w-40 h-40 rounded-full object-cover shadow-lg mb-4">
                             <h4 class="font-semibold text-gray-800">Mancora Town</h4>
                             <p class="text-gray-600">Short Stroll to Cafes</p>
                        </div>
@@ -449,16 +462,16 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">A Glimpse of Your Sanctuary</h2>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"> 
-                        <img src="https://placehold.co/600x450/D8DEE9/4C566A?text=Ambiance+1" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Relaxing ambiance at Eco House Mancora" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                        <img src="https://placehold.co/600x450/D8DEE9/4C566A?text=Ambiance+1" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Relaxing ambiance at La Maison Eco House" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
                         <img src="https://placehold.co/600x450/E5E9F0/4C566A?text=Beach+View" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="View of the beach from the hotel" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
                         <img src="https://placehold.co/600x450/ECEFF4/4C566A?text=Garden+Space" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Lush garden area at the hotel" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
                         <img src="https://placehold.co/600x450/0891b2/FFFFFF?text=Surf+Lifestyle" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Surfing lifestyle shot near Mancora" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
                          <img src="https://placehold.co/600x450/db2777/FFFFFF?text=Kite+Action" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Kitesurfing action shot" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
                          <img src="https://placehold.co/600x450/16a34a/FFFFFF?text=Yoga+Pose" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Yoga pose in the shala" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
-                         <img src="httpsG" loading="lazy" onerror="this.src='https://placehold.co/600x450/d946ef/FFF?text=Image'" alt="Cocktail at sunset" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
-                         <img src="https" loading="lazy" onerror="this.src='https://placehold.co/600x450/f59e0b/FFF?text=Image'" alt="Detail shot of a room's decor" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
-                         <img src="https" loading="lazy" onerror="this.src='https://placehold.co/600x450/3b82f6/FFF?text=Image'" alt="Pool area at Eco House" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
-                         <img src="https" loading="lazy" onerror="this.src='https://placehold.co/600x450/ef4444/FFF?text=Image'" alt="Vibrant street in Mancora town" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https://placehold.co/600x450/d946ef/FFFFFF?text=Sunset+Cocktail" loading="lazy" onerror="this.src='https://placehold.co/600x450/d946ef/FFF?text=Image'" alt="Cocktail at sunset" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https://placehold.co/600x450/f59e0b/FFFFFF?text=Room+Detail" loading="lazy" onerror="this.src='https://placehold.co/600x450/f59e0b/FFF?text=Image'" alt="Detail shot of a room's decor" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https://placehold.co/600x450/3b82f6/FFFFFF?text=Pool+Area" loading="lazy" onerror="this.src='https://placehold.co/600x450/3b82f6/FFF?text=Image'" alt="Pool area at La Maison Eco House" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https://placehold.co/600x450/ef4444/FFFFFF?text=Mancora+Town" loading="lazy" onerror="this.src='https://placehold.co/600x450/ef4444/FFF?text=Image'" alt="Vibrant street in Mancora town" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
                     </div>
                 </div>
             </div>
@@ -488,19 +501,17 @@
             </div>
         </section>
 
-        <!-- All other sections (accommodation, surf, etc.) are REMOVED from this file -->
-
     </main>
 
-    <!-- Footer - UPDATED LINKS -->
+    <!-- Footer - UPDATED LINKS, ADDED FAQ, Updated Name -->
     <footer class="bg-gray-800 text-gray-400">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- About -->
                 <div>
-                    <h3 class="text-lg font-bold text-white mb-4">Eco House Mancora</h3>
+                     <!-- Updated Name -->
+                    <h3 class="text-lg font-bold text-white mb-4">La Maison Eco House</h3>
                     <p class="text-sm">Your eco-friendly home for surf, kitesurf, and yoga in the heart of Peru's northern coast. Adventure and relaxation await.</p>
-                    <!-- NEW 1% for the Ocean -->
                     <p class="text-sm mt-4 flex items-start">
                         <i data-feather="heart" class="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0" style="margin-top: 0.125rem;"></i>
                         <span>We proudly donate 1% of our benefits to Ocean Protection NGO's.</span>
@@ -513,6 +524,7 @@
                         <li><a href="accommodation.html" class="nav-link text-sm hover:text-white" data-page="accommodation">Accommodation</a></li>
                         <li><a href="restaurant.html" class="nav-link text-sm hover:text-white" data-page="restaurant">Restaurant</a></li>
                         <li><a href="location.html" class="nav-link text-sm hover:text-white" data-page="location">Location</a></li>
+                        <li><a href="faq.html" class="nav-link text-sm hover:text-white" data-page="faq">FAQ</a></li> <!-- Added FAQ link -->
                     </ul>
                 </div>
                 <!-- Experiences -->
@@ -533,31 +545,23 @@
                         <li class="flex items-center space-x-3 pt-1"> 
                             <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
                                 <span class="sr-only">Instagram</span>
-                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.067-.06-1.407-.06-4.123v-.08c0-2.643.012-2.987.06-4.043.049 1.064.218 1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-                                </svg>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.067-.06-1.407-.06-4.123v-.08c0-2.643.012-2.987.06-4.043.049 1.064.218 1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>
                             </a>
                             <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
                                 <span class="sr-only">Facebook</span>
-                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
-                                </svg>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
                             </a>
                         </li>
                          <li class="pt-2">
                              <span class="text-sm text-cyan-200">Tripadvisor Travellers' Choice</span>
-                             <!-- 
-                                 IMAGE PLACEHOLDER: 
-                                 Replace this comment with your <img> tag for the Tripadvisor award.
-                                 e.g., <img src="URL_TO_YOUR_AWARD_IMAGE.png" alt="Tripadvisor Travellers Choice" class="w-24 h-auto mt-1">
-                             -->
+                             <!-- Tripadvisor Placeholder -->
                          </li>
                     </ul>
                 </div>
             </div>
-            <!-- Bottom Bar -->
+            <!-- Bottom Bar - Updated Name -->
             <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
-                <p>&copy; <span id="current-year"></span> Eco House Mancora. All rights reserved.</p>
+                <p>&copy; <span id="current-year"></span> La Maison Eco House. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -598,7 +602,7 @@
                  }
             }
 
-            if (mobileMenuButton) { // Check if button exists
+            if (mobileMenuButton) {
                 mobileMenuButton.addEventListener('click', () => {
                     const isMenuOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
                     if (isMenuOpen) {
@@ -608,11 +612,10 @@
                     }
                 });
             } else {
-                console.error("Mobile menu button not found. Check HTML ID: mobile-menu-button");
+                console.error("Mobile menu button not found.");
             }
 
             // --- Mobile Nav Link Click Logic ---
-            // Close menu when a link is clicked
             const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
             mobileNavLinks.forEach(link => {
                 link.addEventListener('click', () => {
@@ -663,13 +666,35 @@
                      showSlide(currentSlide); 
                  } else {
                       if (!prevButton || !nextButton) {
-                        console.warn("Testimonial slider buttons not found. Check IDs: prev-testimonial, next-testimonial");
+                        console.warn("Testimonial slider buttons not found.");
                       }
                       if (slides.length === 0) {
-                         console.warn("No testimonial slides found within #testimonial-slider");
+                         console.warn("No testimonial slides found.");
                       }
                  }
              }
+
+             // --- Set Active Nav Link Based on URL ---
+             // This simple version highlights 'home' on the homepage
+             const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+             const pageName = currentPage.replace('.html', ''); // Assumes 'home.html' or 'index.html' is home
+
+             const desktopLinks = document.querySelectorAll('header .hidden.md\\:flex a.nav-link');
+             const mobileLinks = document.querySelectorAll('#mobile-menu a.nav-link-mobile');
+
+             function setActiveLink(links) {
+                 links.forEach(link => {
+                     const linkPage = link.dataset.page;
+                     // Only highlight 'home' link on the home page
+                     if (linkPage === 'home' && (pageName === 'home' || pageName === 'index' || pageName === '')) {
+                         link.classList.add('active');
+                     } else {
+                         link.classList.remove('active');
+                     }
+                 });
+             }
+             setActiveLink(desktopLinks);
+             setActiveLink(mobileLinks);
 
             // Set current year in footer
             const currentYearSpan = document.getElementById('current-year');
@@ -687,7 +712,7 @@
                              if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
                                  feather.replace();
                              } else {
-                                  console.error("Feather icons library (feather) is not loaded or not defined correctly after delay.");
+                                  console.error("Feather icons library (feather) not loaded after delay.");
                              }
                         }, 500);
                     }
@@ -702,5 +727,4 @@
 
 </body>
 </html>
-"
 
