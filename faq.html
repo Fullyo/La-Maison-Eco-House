@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Eco House Mancora</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter (body) and Poppins (headings) fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
+    <!-- Load Feather Icons -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Apply Poppins to headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+         main section .font-black { /* Banner headings */
+             font-weight: 900;
+         }
+         main h2, footer h3 { /* Section titles */
+            font-weight: 700;
+         }
+         main h3, main h4 { /* Card/item titles and FAQ Questions */
+            font-weight: 600; /* Made FAQ Questions SemiBold */
+         }
+
+        /* Active nav link style */
+        .nav-link.active, .nav-link-mobile.active {
+            color: #0c4a6e; /* Tailwind cyan-900 */
+            font-weight: 500;
+        }
+         .nav-link-mobile.active {
+             background-color: #f0f9ff; /* cyan-50 */
+         }
+
+        /* Hero text shadow for readability */
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Fade in animation for page content */
+        main > section {
+             animation: fadeIn 0.4s ease-out;
+        }
+         @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Accordion Styles --- */
+        details {
+            background-color: #ffffff; /* white */
+            border-radius: 0.75rem; /* rounded-xl */
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-md */
+            border: 1px solid #e5e7eb; /* gray-200 */
+        }
+        details[open] {
+             border-color: #a5f3fc; /* cyan-200 */
+             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+        }
+
+        summary {
+            padding: 1rem 1.5rem;
+            font-size: 1.125rem; /* text-lg equivalent */
+            font-weight: 600; /* Poppins SemiBold */
+            color: #1f2937; /* gray-800 */
+            cursor: pointer;
+            list-style: none; /* Remove default marker */
+            position: relative;
+            outline: none;
+        }
+        summary::-webkit-details-marker { display: none; } /* Hide marker on Chrome/Safari */
+        summary::marker { display: none; } /* Hide marker on Firefox */
+
+        /* Add custom marker (e.g., chevron) */
+        summary::after {
+            content: '+'; /* Simple plus sign */
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #0891b2; /* cyan-600 */
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] summary::after {
+            content: '−'; /* Minus sign */
+            transform: translateY(-50%);
+        }
+
+        .faq-answer-content {
+             padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+             color: #4b5563; /* gray-600 */
+             border-top: 1px solid #e5e7eb; /* gray-200 */
+             margin-top: 0.5rem;
+        }
+        
+        .faq-answer-content p {
+             margin-bottom: 0.75rem;
+        }
+         .faq-answer-content strong {
+             font-weight: 600;
+             color: #1f2937; /* gray-800 */
+         }
+         .faq-answer-content ul {
+             list-style-type: disc;
+             margin-left: 1.5rem;
+             margin-top: 0.5rem;
+             margin-bottom: 0.75rem;
+         }
+          .faq-answer-content li {
+             margin-bottom: 0.25rem;
+         }
+         .faq-answer-content .advice-box { /* Style for specific boxes */
+             border: 2px solid #68ded4; /* Use theme color */
+             padding: 1rem;
+             display: inline-block;
+             margin-top: 1rem;
+             border-radius: 0.5rem; /* rounded-lg */
+             background-color: #f0fdfa; /* cyan-50 */
+         }
+         .faq-answer-content .advice-box h6 {
+             font-weight: bold;
+             letter-spacing: 0.1em;
+             margin-bottom: 0.5rem;
+             color: #0e7490; /* cyan-800 */
+             text-transform: uppercase;
+         }
+          .faq-answer-content .advice-box p {
+             margin-bottom: 0.5rem;
+             padding: 0;
+             color: #374151; /* gray-700 */
+         }
+         .faq-answer-content .advice-box p:last-child {
+             margin-bottom: 0;
+         }
+
+
+         /* Specific styling for airport table idea */
+         .airport-table th, .airport-table td {
+             padding: 0.5rem 1rem;
+             border-bottom: 1px solid #e5e7eb; /* gray-200 */
+             text-align: left;
+         }
+          .airport-table th {
+             font-weight: 600;
+             color: #1f2937; /* gray-800 */
+          }
+          .airport-table {
+             width: 100%;
+             margin-top: 1rem;
+             border-collapse: collapse;
+          }
+
+          /* Chart Styling - Placeholder for visual representation */
+          .chart-placeholder {
+             background-color: #f3f4f6; /* gray-100 */
+             border: 1px dashed #d1d5db; /* gray-300 */
+             padding: 2rem;
+             text-align: center;
+             color: #6b7280; /* gray-500 */
+             border-radius: 0.5rem; /* rounded-lg */
+             margin-top: 1rem;
+          }
+
+
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 w-full">
+        <nav>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="home.html" class="nav-link" data-page="home">
+                            <h1 class="text-2xl font-bold text-gray-900">Eco House <span class="text-cyan-700">Mancora</span></h1>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation - Links updated -->
+                    <div class="hidden md:flex md:items-center md:space-x-6">
+                        <a href="home.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="home">Home</a>
+                        <a href="accommodation.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="accommodation">Accommodation</a>
+                        <a href="surf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="surf">Surf</a>
+                        <a href="kitesurf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="kitesurf">Kitesurf</a>
+                        <a href="yoga.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="yoga">Yoga</a>
+                        <a href="restaurant.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="restaurant">Restaurant</a>
+                        <a href="location.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="location">Location</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="contact">Contact</a>
+                        <a href="faq.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="faq">FAQ</a> <!-- Added FAQ Link -->
+                    </div>
+
+                    <!-- Book Now (Desktop) -->
+                    <div class="hidden md:block">
+                        <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                            Book Now
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg id="hamburger-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu - Links updated -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed top-20 left-0 w-full h-[calc(100vh-80px)] overflow-y-auto transform -translate-x-full z-40">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="home.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="home">Home</a>
+                    <a href="accommodation.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="accommodation">Accommodation</a>
+                    <a href="surf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="surf">Surf</a>
+                    <a href="kitesurf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="kitesurf">Kitesurf</a>
+                    <a href="yoga.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="yoga">Yoga</a>
+                    <a href="restaurant.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="restaurant">Restaurant</a>
+                    <a href="location.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="location">Location</a>
+                    <a href="contact.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="contact">Contact</a>
+                    <a href="faq.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="faq">FAQ</a> <!-- Added FAQ Link -->
+                </div>
+                <!-- Book Now (Mobile) -->
+                <div class="px-5 py-6">
+                    <a href="#" class="block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- =================== -->
+        <!-- FAQ PAGE           -->
+        <!-- =================== -->
+        <section id="faq" class="bg-gray-100"> 
+            <!-- Page Banner -->
+            <div class="relative bg-gray-900 h-48 md:h-64 flex items-center justify-center text-center text-white overflow-hidden">
+                <img src="https://placehold.co/1600x400/6b7280/FFFFFF?text=FAQ" 
+                     loading="lazy"
+                     onerror="this.src='https://placehold.co/1600x400/333/FFF?text=Image+Missing'"
+                     alt="Question marks background" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-50">
+                <div class="relative z-10 p-4">
+                    <h2 class="text-4xl md:text-5xl font-black hero-text-shadow uppercase tracking-wider">
+                        Frequently Asked Questions
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="py-20">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <!-- Travel Information Section -->
+                    <div id="travel" class="mb-16">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">Travel Information</h2>
+
+                        <!-- Accordion Items -->
+                        <details>
+                            <summary>How do I get to Mancora?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>It’s easy! There are 2 main ways to get to Máncora and the north of Peru from abroad:</p>
+                                <p>a) Via <strong>Lima (LIM)</strong>, the Peruvian capital city, or</p>
+                                <p>b) Via <strong>Guayaquil (GYE)</strong>, South Ecuador.</p>
+                                <p>Most guests find traveling through Lima easier, as the only option from Guayaquil to Mancora involves a night bus crossing the border into Peru late at night.</p>
+                                <p>Consider your options when choosing Lima or Guayaquil. Flights to Guayaquil might sometimes be cheaper, especially if you are traveling from the north of Latin America.</p>
+                                <p><strong>From Southern Europe:</strong> Check flights from Madrid (often low-cost options available, but check baggage policies for large surf quivers). Flights typically go to Lima.</p>
+                                <p><strong>From Northern Europe:</strong> Direct flights to Lima are available from cities like Paris and Amsterdam. These are often less expensive than flying to Guayaquil.</p>
+                                <p><strong>From the USA:</strong> While flying to Guayaquil and taking a bus is possible, it involves a long bus journey and is often chosen for budget reasons. Flying to Lima is generally easier. Direct (nonstop) flights to Lima (LIM) are available from major hubs like Atlanta, Dallas-Fort Worth, Houston, Los Angeles, Miami, and New York.</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Once in Lima, should I fly or take a bus to Mancora?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>From Lima, you can reach the Mancora area by domestic flight or by bus.</p>
+                                <p><strong>Bus:</strong> The bus journey takes around 16 hours. While long, you travel mostly overnight on the straight Pan-American highway. Premium bus companies offer comfortable services like 180° reclining seats, Wi-Fi, personal screens, and meals.</p>
+                                <p><strong>Flight:</strong> Flying is significantly faster (approx. 1.5-hour flight plus airport transfer time).</p>
+                                <p>The best choice depends on your flight connections from home, your available time, and your budget.</p>
+                            </div>
+                        </details>
+
+                         <details>
+                            <summary>Which airports are closest to Mancora?</summary>
+                            <div class="faq-answer-content">
+                                 <p>There are several airports serving the Mancora region:</p>
+                                 <ul>
+                                    <li><strong>Punta Sal (Mancora Aerodrome - Walter Braedt Segú):</strong> A small aerodrome just 5 minutes outside Mancora, currently served by ATSA Airlines. Check their flight schedules directly.</li>
+                                    <li><strong>Talara (TYL - Cap. FAP Víctor Montes Arias Int'l):</strong> The closest major airport, about 1 hour 10 minutes away by taxi.</li>
+                                    <li><strong>Tumbes (TBP - Cap. FAP Pedro Canga Rodríguez Int'l):</strong> About 1 hour 45 minutes away by taxi.</li>
+                                    <li><strong>Piura (PIU - Cap. FAP Guillermo Concha Iberico Int'l):</strong> About 2 hours 30 minutes away by taxi.</li>
+                                 </ul>
+                                 <!-- Table for airport details -->
+                                 <div class="overflow-x-auto mt-4">
+                                     <table class="min-w-full bg-white rounded-lg shadow airport-table">
+                                         <thead>
+                                             <tr>
+                                                 <th>City</th>
+                                                 <th>Airport Code</th>
+                                                 <th>Distance</th>
+                                                 <th>Approx. Taxi Price (S/.)</th>
+                                             </tr>
+                                         </thead>
+                                         <tbody>
+                                             <tr>
+                                                 <td>Talara</td>
+                                                 <td>TYL</td>
+                                                 <td>~1h 10min</td>
+                                                 <td>~130</td>
+                                             </tr>
+                                             <tr>
+                                                 <td>Tumbes</td>
+                                                 <td>TBP</td>
+                                                 <td>~1h 45min</td>
+                                                 <td>~160</td>
+                                             </tr>
+                                             <tr>
+                                                 <td>Piura</td>
+                                                 <td>PIU</td>
+                                                 <td>~2h 30min</td>
+                                                 <td>~250</td>
+                                             </tr>
+                                         </tbody>
+                                     </table>
+                                </div>
+                                <p class="mt-4 text-sm italic">Taxi prices are approximate and subject to change. Eco House Mancora can help arrange trusted airport transfers.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>Which airlines offer domestic flights in Peru?</summary>
+                            <div class="faq-answer-content">
+                                 <p>The main domestic airlines in Peru include LATAM, Sky Airline Peru, and JetSMART Peru. Viva Air ceased operations. For flights directly to the small Mancora aerodrome, check ATSA Airlines.</p>
+                                 <p class="mt-4 font-semibold text-gray-800 uppercase text-sm tracking-wide">Recommendations:</p>
+                                 <p>a) LATAM often offers reliable service. It's generally best to buy tickets directly from the airline's official website.</p>
+                                 <p>b) When booking flights from home, try to book through to your final domestic destination (Talara, Tumbes, or Piura). However, ensure you have sufficient layover time in Lima (at least 2-3 hours is recommended), as you will need to collect your luggage, pass through immigration/customs (if arriving internationally), and re-check in for your domestic flight.</p>
+                             </div>
+                         </details>
+
+                        <details>
+                             <summary>How do I get to Eco House Mancora from the airport?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>The easiest way is by taxi. <strong>Eco House Mancora can organize a trusted taxi transfer for you upon request.</strong> Alternatively, you can find official taxis inside the airport terminals (refer to the approximate prices in the airport question above).</p>
+                                <p><strong>Taxi Sharing Tip:</strong> You might be able to share a taxi by finding other passengers heading to Mancora or asking drivers outside the terminal ("Quiero compartir taxi"), potentially reducing the cost.</p>
+                                <p><strong>Other Options (Less Recommended):</strong></p>
+                                <ul>
+                                    <li>"Colectivo" vans are available but generally not recommended for comfort or safety.</li>
+                                    <li>Local buses (like EPPO) are safer but slower. From Talara, you could take a moto-taxi to the bus terminal for frequent buses to Mancora. From Piura or Tumbes, the bus journey is significantly longer, making a taxi the preferred option.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        
+                        <details>
+                             <summary>Which bus company should I use from Lima to Mancora?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>We recommend premium bus companies like <strong>Cruz del Sur</strong>, <strong>Oltursa</strong>, or <strong>ExcluCiva</strong> for the long journey from Lima.</p>
+                                 <p>Tips for Bus Travel:</p>
+                                <ul>
+                                    <li>Choose the second floor for potentially better views and specify 180° reclining seats ("cama") if available.</li>
+                                    <li>Seats in the front half of the bus often experience less shaking.</li>
+                                    <li>Consider the left side going north (towards Mancora) and the right side returning south for potential sea views.</li>
+                                </ul>
+                                <p>Avoid the cheapest bus alternatives for safety and comfort reasons.</p>
+                                <p>Buses typically leave Lima between 4 PM and 6 PM, arriving in Mancora the following morning (around 9 AM - 10 AM).</p>
+                                <p>Fares are approximately 160 soles (~50 USD) one-way. Booking online a few days in advance is recommended.</p>
+                                <p>You can easily book your return ticket once you are in Mancora.</p>
+                            </div>
+                        </details>
+
+                    </div>
+                    
+                    <!-- Kitesurfing Section -->
+                    <div id="kitesurfing-faq" class="mb-16">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">Kitesurfing</h2>
+                        
+                        <details>
+                            <summary>When is the best time/wind season for kitesurfing in Northern Peru?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>The main wind season here in Northern Peru (Mancora, Lobitos area) is generally from <strong>mid-April to mid-January</strong>.</p>
+                                <p>Peru offers year-round wind options, with the South (Paracas) having its best season from November to April.</p>
+                                <p>Our season in the far north (April – December) offers excellent wind statistics. Wind reliability might decrease slightly towards the end of December/early January due to summer conditions.</p>
+                                <!-- Placeholder for Wind Chart -->
+                                <div class="chart-placeholder">
+                                    <p class="font-semibold">Wind Chart Placeholder</p>
+                                    <p>(Indicates strongest, most consistent winds typically July - November)</p>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details>
+                             <summary>What are the wind statistics like on the North Shore?</summary> <!-- Rephrased Q -->
+                             <div class="faq-answer-content">
+                                 <p>The region offers fantastic wind reliability during the season (April-December). If participating in day trips to various spots along the coast, the chance of riding is extremely high (often cited above 98%).</p>
+                                 <p>The wind typically comes from the southwest, starting around midday (12 PM) and lasting until late afternoon (around 5 PM).</p>
+                                 <p>Directly in Mancora town, the statistics might be slightly lower (perhaps 4-5 days a week on average), but it remains a great spot, especially for foiling, potentially allowing you to kitesurf almost every day.</p>
+                             </div>
+                         </details>
+
+                        <details>
+                            <summary>When is the best season for kitesurfing waves?</summary>
+                             <div class="faq-answer-content">
+                                <p>Since the wind is reliable for much of the year (April-December), the main variable for wave kiting becomes the swell.</p>
+                                <p>During Peru's Austral Winter (roughly May-November), we receive consistent South and Southwest ground swells originating from the South Pacific, often with long periods (up to 22 seconds), which create quality waves.</p>
+                                <p><strong>Ground Swell vs. Wind Swell:</strong> Ground swells travel longer distances, resulting in more organized, powerful, and tidy waves compared to local wind swells.</p>
+                                <p><strong>Swell Statistics:</strong> Generally, <strong>May-July</strong> and <strong>October-November</strong> often see the best swell conditions. Wind strength typically increases from August onwards.</p>
+                                <p>However, great wave sessions can occur throughout the season. April-June is also a favorite for many, as the water is still warm, and it marks the beginning of the season. The Peruvian North Shore offers a great combination of wind and waves, and periods with absolutely no waves are rare and usually short-lived.</p>
+                                <div class="advice-box">
+                                     <h6>Advice for Wave Riders:</h6>
+                                     <p>1. Come anytime during the main wind season (April-December, perhaps avoiding late Dec/early Jan if waves are the sole focus).</p>
+                                     <p>2. A longer stay (10-14 days) increases your chances of catching good swells.</p>
+                                     <p>3. If flexible, monitor swell forecasts 1-2 weeks out to potentially time your trip.</p>
+                                </div>
+                             </div>
+                         </details>
+                        
+                         <details>
+                            <summary>What size kites should I bring?</summary>
+                            <div class="faq-answer-content">
+                                <p><strong>Standard Sizes:</strong> For the Peruvian North Shore, a common standard size is a <strong>9m</strong> for a ~75kg (165lb) rider and a <strong>7m</strong> for a ~60kg (130lb) rider.</p>
+                                <p><strong>Ideal Quiver:</strong> Bringing 2 kites is better, and 3 is ideal to cover the range.</p>
+                                <p><strong>Recommendations for a 2-Kite Quiver:</strong></p>
+                                <ul>
+                                    <li><strong>May to August:</strong> Consider bringing a size larger than your standard kite (e.g., 11m or 12m if your standard is 9m, but generally not bigger than 13m unless you are a heavier rider).</li>
+                                    <li><strong>September to October:</strong> Consider bringing a size smaller than your standard kite (e.g., 7m if your standard is 9m).</li>
+                                    <li><strong>November to December:</strong> Conditions can be variable; sizes like 7m, 9m, and 12m are often used.</li>
+                                </ul>
+                                <p>Don't want to travel heavy? Eco House Mancora offers premium gear rentals on-site!</p>
+                            </div>
+                         </details>
+
+                         <details>
+                             <summary>What wetsuit do I need?</summary>
+                             <div class="faq-answer-content">
+                                <p>Water temperature varies slightly through the year (see temperature question). During the Austral winter (approx. May – November), the water in Mancora is typically warm enough (around 20-23°C / 68-73°F) that many riders are comfortable without a wetsuit or just use a light top.</p>
+                                <p>However, if participating in kite trips to southern spots impacted by the Humboldt current, the water can be cooler (down to 18°C / 64°F), and a <strong>3/2mm full suit</strong> is recommended.</p>
+                                <p>During the warmer months (approx. December - April), water temperatures are higher, and a wetsuit is generally not needed.</p>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>What else should I bring (booties, leash, helmet, etc.)?</summary>
+                            <div class="faq-answer-content">
+                                <p><strong>Reef Booties:</strong> Most surfers and kitesurfers do not wear booties here, especially when launching directly from our sandy beach area in Las Pocitas. However, if you plan to explore other spots or prefer protection, feel free to bring them.</p>
+                                <p><strong>Surf/Kiteboard Leash:</strong> Recommended if you plan on wave riding, especially at more advanced spots.</p>
+                                <p><strong>Helmet:</strong> While not mandatory or commonly used by all, a helmet is always a good safety measure, especially when learning or pushing your limits. Most incidents involve contact with the board.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>Is Mancora and the area good for foiling?</summary>
+                            <div class="faq-answer-content">
+                                <p>Yes, absolutely. The water deepens fairly quickly just off the shore, providing ample depth for foiling throughout the bay. You can launch from near Eco House and explore upwind towards the main point break or glide near the pier.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>Is Mancora a good place for kiteboarding beginners?</summary>
+                            <div class="faq-answer-content">
+                                <p>Yes, Mancora is generally a good place for beginners, and lessons are offered right here.</p>
+                                <p><strong>Pros:</strong></p>
+                                <ul>
+                                    <li>The typical side-onshore wind direction is considered the safest for learning.</li>
+                                    <li>The wind is generally very consistent during the season.</li>
+                                    <li>The beaches are wide and sandy, with fewer crowds than many international spots.</li>
+                                </ul>
+                                <p><strong>Potential Drawback:</strong> When large swells hit the coast (which can happen occasionally, maybe a few days a month during swell season), there isn't always a perfectly sheltered flat-water spot nearby. Lessons might need to be rescheduled if waves become too large (e.g., above shoulder high).</p>
+                            </div>
+                         </details>
+
+                         <details>
+                             <summary>Is wave kitesurfing safe in Peru?</summary>
+                             <div class="faq-answer-content">
+                                <p>Yes, the Peruvian North Shore wave spots are considered very safe compared to many other destinations, thanks to:</p>
+                                <ul>
+                                    <li>Mainly sandy bottoms and beaches.</li>
+                                    <li>Absence of sharks or other major hazards.</li>
+                                    <li>Predominantly side-onshore or side-shore winds at most spots (few offshore spots).</li>
+                                    <li>Steady, clean wind conditions.</li>
+                                    <li>Typically medium-sized waves (rarely exceeding 2 meters / 6-8 feet, except on exceptional swell days).</li>
+                                    <li>Experienced local guides and schools prioritizing safety (offering support, rescue, first aid).</li>
+                                </ul>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>What are the requirements for joining guided kite trips/safaris?</summary>
+                             <div class="faq-answer-content">
+                                <p>Guided wave trips cater to both experienced wave riders and those looking to get started in waves.</p>
+                                <p>However, participants need solid general kite control. You should be comfortable and able to:</p>
+                                <ul>
+                                    <li>Ride consistently upwind.</li>
+                                    <li>Perform basic jumps.</li>
+                                    <li>Ride toeside.</li>
+                                    <li>Body drag upwind to recover your board.</li>
+                                    <li>Know self-rescue procedures (a refresher can be provided).</li>
+                                </ul>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>Can freeriders or freestylers join the kite trips?</summary>
+                             <div class="faq-answer-content">
+                                <p>While the focus of many trips is wave riding due to the quality of the spots, freeriders and freestylers are absolutely welcome! There's plenty of space outside the main wave breaks to practice jumps or simply cruise.</p>
+                             </div>
+                         </details>
+
+                    </div>
+
+                    <!-- General Mancora & Hotel Life Section -->
+                    <div id="general-mancora-faq" class="mb-16">
+                         <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">General Questions (Mancora & Hotel)</h2>
+
+                         <details>
+                            <summary>What is the water and air temperature in Máncora?</summary>
+                            <div class="faq-answer-content">
+                                <p>Air and water temperatures vary throughout the year. Here's a general guide:</p>
+                                <!-- Placeholder for Temp Chart -->
+                                <div class="chart-placeholder">
+                                    <p class="font-semibold">Air & Water Temperature Chart Placeholder</p>
+                                    <p>Air: Generally ranges from ~27°C/80°F (Sept) to ~36°C/97°F (Feb/Mar).</p>
+                                    <p>Water: Generally ranges from ~19°C/66°F (Sept) to ~25°C/77°F (Feb).</p>
+                                    <p>(See specific chart for monthly details if available)</p>
+                                </div>
+                                <p>It's generally warm year-round!</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>What clothing should I bring?</summary>
+                            <div class="faq-answer-content">
+                                <p>Casual beachwear is the standard: shorts, t-shirts, flip-flops, swimwear.</p>
+                                <p>Bring a good hoodie or light jacket for cooler evenings, especially during the Peruvian winter months (approx. July-October).</p>
+                                <p>During the summer months (approx. December – April), evenings are warmer, and you likely won't need the hoodie.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>Is Mancora suitable for my non-kitesurfing partner or kids?</summary> <!-- Merged suitability question -->
+                             <div class="faq-answer-content">
+                                <p>Yes, definitely! Mancora and Eco House offer plenty for everyone.</p>
+                                <p><strong>For Partners/Non-Kiters:</strong> Relax on the beautiful beaches, read by the pool, enjoy spa treatments, practice yoga, go surfing or stand-up paddling, take horse rides, or explore the area with excursions like whale watching (seasonal), diving, or fishing.</p>
+                                <p>Peru is also famous for its food! Explore the diverse restaurants in Mancora, try fresh ceviche (a local specialty), and enjoy the vibrant northern Peruvian cuisine.</p>
+                                <p><strong>For Kids:</strong> Children love the beach and the hotel pool. Depending on their age (typically 13+ recommended for lessons), they can also try learning to surf or kitesurf. Many excursions are family-friendly.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                             <summary>What other activities (non-wind) are available?</summary> <!-- Rephrased Q -->
+                             <div class="faq-answer-content">
+                                <p>Beyond surfing, kitesurfing, and yoga, Eco House Mancora and the surrounding area offer many activities:</p>
+                                <ul>
+                                    <li>Stand-Up Paddling (SUP)</li>
+                                    <li>Diving</li>
+                                    <li>Whale Watching (typically July - October)</li>
+                                    <li>Cooking Lessons</li>
+                                    <li>Spa Treatments & Massages</li>
+                                    <li>Horse Riding on the beach</li>
+                                    <li>Motocross Enduro</li>
+                                </ul>
+                                <p><strong>Day Tours can also be arranged:</strong> Explore mangroves, visit inland natural thermal tubs, take a ceviche tour, paddle with giant sea turtles, go fishing with local fishermen, or enjoy a yacht trip (seasonal).</p>
+                                <!-- Link might need updating -->
+                                <!-- <p>See all our experiences <a href="#" class="text-cyan-700 hover:underline">here</a>.</p> -->
+                             </div>
+                         </details>
+
+                        <details>
+                             <summary>Is it possible to party in Mancora?</summary>
+                             <div class="faq-answer-content">
+                                <p>Yes, Mancora town has a vibrant nightlife scene with bars and small clubs.</p>
+                                <p>However, Eco House Mancora is located in the quieter Las Pocitas area, offering a choice: you can enjoy a healthy, relaxed retreat vibe, or head into town for more social fun. If you prefer early nights and early mornings, you won't be disturbed by the town's nightlife here. Mancora offers both experiences!</p>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>When is Eco House Mancora open?</summary> <!-- Adapted Q -->
+                            <div class="faq-answer-content">
+                                <p>Eco House Mancora is typically open year-round. However, kitesurfing activities and rentals through our partners are primarily available during the main wind season (approx. mid-April to mid-January). Please contact us to confirm availability for specific dates or activities outside the main season.</p>
+                            </div>
+                         </details>
+
+                    </div>
+
+                    <!-- Booking & Payment Section -->
+                     <div id="booking-payment-faq" class="mb-16">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">Booking & Payment</h2>
+
+                        <details>
+                            <summary>How do I book my stay or activities?</summary> <!-- Adapted Q -->
+                            <div class="faq-answer-content">
+                                <p><strong>Step 1: Contact Us:</strong> Reach out via our <a href="contact.html" class="text-cyan-700 hover:underline">Contact Page</a> or booking links. Let us know your desired dates, number of people, preferred accommodation type (if known), and any activities you're interested in (surf, kite, yoga, tours).</p>
+                                <p><strong>Step 2: Proposal:</strong> We'll check availability and send you a personalized proposal based on your interests and budget.</p>
+                                <p><strong>Step 3: Confirmation:</strong> Once you approve the proposal, we'll finalize the reservation and send an invoice with payment instructions (deposit often required).</p>
+                                <p><strong>Step 4: Final Details:</strong> We'll provide your confirmed itinerary and helpful information for preparing for your trip. We're available to answer any further questions!</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Is it necessary to book activities in advance?</summary> <!-- Adapted Q -->
+                            <div class="faq-answer-content">
+                                <p>It's highly recommended, especially during peak season, to ensure availability for accommodation, specific lessons (surf/kite), or guided trips.</p>
+                                <p>If you're staying for a longer period and have flexibility, you might be able to arrange some activities upon arrival, but pre-booking guarantees your spot and helps us plan accordingly.</p>
+                            </div>
+                         </details>
+
+                        <details>
+                            <summary>Do you charge extra commissions for organizing activities or transfers?</summary> <!-- Adapted Q -->
+                            <div class="faq-answer-content">
+                                <p>No, we coordinate activities and transfers with our trusted partners as part of our service. We aim to provide fair and transparent pricing, sometimes offering package deals when booking accommodation and activities together.</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>What should I check regarding money before traveling?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>It's wise to prepare your finances before your trip:</p>
+                                <ul>
+                                    <li>Inform your bank about your travel dates to avoid blocked cards.</li>
+                                    <li>Check the daily/weekly withdrawal limits on your ATM/credit cards and consider requesting a temporary increase if needed.</li>
+                                    <li>Inquire about foreign transaction fees and ATM withdrawal fees charged by your bank. Some cards offer lower or no fees.</li>
+                                    <li>Consider bringing two different cards (stored separately) as a backup.</li>
+                                    <li>Bringing some cash (USD is widely accepted for larger payments and easily exchanged) can be useful to avoid excessive ATM fees, especially as Peru is relatively safe for travelers taking standard precautions.</li>
+                                </ul>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Are there ATMs in Mancora?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>Yes, there are several ATMs available in Mancora town.</p>
+                                <p>Be aware that Peruvian ATMs often have a withdrawal limit per transaction (e.g., around $200-$400 USD equivalent, though this can vary). Additionally, both the local ATM and your home bank may charge fees for each withdrawal. Relying solely on ATM withdrawals can become costly and might be limited by daily/weekly card limits.</p>
+                            </div>
+                        </details>
+
+                         <details>
+                            <summary>What currency is used? Should I bring USD or Soles?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>The official currency is the Peruvian Nuevo Sol (PEN or S/.).</p>
+                                <p>Soles are used for most daily expenses (small shops, local meals, moto-taxis).</p>
+                                <p>US Dollars (USD) are often accepted for larger expenses like hotels, tours, and nicer restaurants. Prices for tourism services are sometimes quoted directly in USD.</p>
+                                <p><strong>Recommendation:</strong> Bring a mix. Have enough Soles for daily incidentals. Bring USD (newer, undamaged bills preferred) for larger payments and easy exchange. Exchanging USD to Soles is straightforward in Mancora, though rates might be slightly less favorable than in Lima.</p>
+                            </div>
+                        </details>
+
+                         <details>
+                             <summary>How can I pay at Eco House Mancora?</summary> <!-- Adapted Q -->
+                            <div class="faq-answer-content">
+                                <p>Our prices are typically quoted in US Dollars (USD) for clarity. You can usually settle your final bill using USD or Peruvian Soles (PEN). We use fair, current exchange rates if converting between currencies. Please confirm accepted payment methods (cash, card, transfer) when booking.</p>
+                            </div>
+                         </details>
+
+                        <details>
+                            <summary>How and where should I exchange currency?</summary>
+                            <div class="faq-answer-content">
+                                <p>Exchanging currency at Lima's airport upon arrival is convenient but often offers poor rates. Airport taxis usually accept USD.</p>
+                                <p>If spending time in Lima, exchange rates are generally better there. Use official exchange houses ("Casas de Cambio") rather than street money changers for better security and rates.</p>
+                                <p>In Mancora, you can exchange USD at banks or authorized exchange points. Eco House staff can advise on reliable options.</p>
+                            </div>
+                        </details>
+
+                         <details>
+                            <summary>What if I have Euros or other currencies?</summary>
+                            <div class="faq-answer-content">
+                                <p>Euros (EUR) might be exchangeable in major cities like Lima or tourist hubs like Mancora, but rates may not be optimal, and acceptance is less common than USD.</p>
+                                <p>If arriving directly to Mancora without passing through Lima, it's generally best to bring US Dollars obtained in your home country.</p>
+                            </div>
+                         </details>
+
+                     </div>
+
+                     <!-- Add other sections/categories as needed -->
+
+                     <!-- Still need help? Contact CTA -->
+                     <div class="mt-20 text-center bg-white p-8 rounded-xl shadow-lg border-t-4 border-cyan-600">
+                          <h2 class="text-2xl font-bold text-gray-900 mb-4">Still Have Questions?</h2>
+                          <p class="text-lg text-gray-600 mb-6">If you can't find the answer you're looking for, please don't hesitate to reach out to us directly.</p>
+                           <a href="contact.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                             Contact Us
+                         </a>
+                     </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - Links updated, Added FAQ Link -->
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Eco House Mancora</h3>
+                    <p class="text-sm">Your eco-friendly home for surf, kitesurf, and yoga in the heart of Peru's northern coast. Adventure and relaxation await.</p>
+                    <p class="text-sm mt-4 flex items-start">
+                        <i data-feather="heart" class="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0" style="margin-top: 0.125rem;"></i>
+                        <span>We proudly donate 1% of our benefits to Ocean Protection NGO's.</span>
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accommodation.html" class="nav-link text-sm hover:text-white" data-page="accommodation">Accommodation</a></li>
+                        <li><a href="restaurant.html" class="nav-link text-sm hover:text-white" data-page="restaurant">Restaurant</a></li>
+                        <li><a href="location.html" class="nav-link text-sm hover:text-white" data-page="location">Location</a></li>
+                        <li><a href="faq.html" class="nav-link text-sm hover:text-white active" data-page="faq">FAQ</a></li> <!-- Added FAQ link -->
+                    </ul>
+                </div>
+                <!-- Experiences -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Experiences</h3>
+                    <ul class="space-y-2">
+                        <li><a href="surf.html" class="nav-link text-sm hover:text-white" data-page="surf">Surf</a></li>
+                        <li><a href="kitesurf.html" class="nav-link text-sm hover:text-white" data-page="kitesurf">Kitesurf</a></li>
+                        <li><a href="yoga.html" class="nav-link text-sm hover:text-white" data-page="yoga">Yoga</a></li>
+                    </ul>
+                </div>
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="nav-link text-sm hover:text-white" data-page="contact">Contact Us</a></li>
+                        <!-- Social Icons -->
+                        <li class="flex items-center space-x-3 pt-1"> 
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Instagram</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.067-.06-1.407-.06-4.123v-.08c0-2.643.012-2.987.06-4.043.049 1.064.218 1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Facebook</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
+                            </a>
+                        </li>
+                         <li class="pt-2">
+                             <span class="text-sm text-cyan-200">Tripadvisor Travellers' Choice</span>
+                             <!-- Tripadvisor Placeholder -->
+                         </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
+                <p>&copy; <span id="current-year"></span> Eco House Mancora. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =================== -->
+    <!-- JAVASCRIPT LOGIC   -->
+    <!-- =================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            function openMobileMenu() {
+                if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.remove('hidden', '-translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                    hamburgerIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            function closeMobileMenu() {
+                 if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.add('-translate-x-full');
+                    mobileMenu.classList.remove('translate-x-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300); // Wait for transition
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                 }
+            }
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isMenuOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    if (isMenuOpen) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            } else {
+                console.error("Mobile menu button not found.");
+            }
+
+             // --- Mobile Nav Link Click Logic ---
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenuButton && mobileMenuButton.getAttribute('aria-expanded') === 'true') {
+                        closeMobileMenu();
+                    }
+                });
+            });
+
+            // --- Set Active Nav Link Based on URL ---
+            const currentPage = window.location.pathname.split('/').pop() || 'home.html'; 
+            // Handle FAQ page specifically for active state
+            const pageName = currentPage.includes('faq.html') ? 'faq' : currentPage.replace('.html', ''); 
+            
+            const desktopLinks = document.querySelectorAll('header .hidden.md\\:flex a.nav-link');
+            const mobileLinks = document.querySelectorAll('#mobile-menu a.nav-link-mobile');
+
+            function setActiveLink(links) {
+                links.forEach(link => {
+                    const linkPage = link.dataset.page;
+                    // Highlight if the link's data-page matches the current page name
+                    if (linkPage === pageName || (pageName === 'home' && linkPage === 'home') ) { 
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+            // Add FAQ to desktop links check
+             setActiveLink(desktopLinks); 
+             setActiveLink(mobileLinks);
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if(currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+            
+            // Initialize Feather Icons
+            function initializeFeatherIcons() {
+                try {
+                    if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                        feather.replace();
+                    } else {
+                        setTimeout(() => {
+                             if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                                 feather.replace();
+                             } else {
+                                  console.error("Feather icons library (feather) not loaded after delay.");
+                             }
+                        }, 500);
+                    }
+                } catch (e) {
+                    console.error("Feather icons failed to initialize:", e);
+                }
+            }
+            
+            initializeFeatherIcons(); // Call it once on load
+        });
+    </script>
+
+</body>
+</html>
+
