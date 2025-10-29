@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco House Mancora - Surf, Kitesurf & Yoga Hotel</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- Load Inter (body) and Poppins (headings) fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
+    <!-- Load Feather Icons (for location icons) -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif; /* Keep Inter for body */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Apply Poppins to headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700; /* Default bold for Poppins headings */
+        }
+        /* Make Hero/Banner heading extra bold */
+         #home h2.font-black, main section .font-black {
+             font-weight: 900; /* Use Poppins Black for hero */
+         }
+         /* Make section titles bold */
+         main h2, footer h3 {
+            font-weight: 700; /* Poppins Bold */
+         }
+         /* Make card/item titles semi-bold */
+         main h3, main h4 {
+            font-weight: 600; /* Poppins SemiBold */
+         }
+
+
+        /* Active nav link style */
+        /* This can be simplified, or we can add a new JS snippet to check the current page URL */
+        .nav-link.active {
+            color: #0c4a6e; /* Tailwind cyan-900 */
+            font-weight: 500;
+        }
+         .nav-link-mobile.active {
+             color: #0c4a6e; /* Tailwind cyan-900 */
+             background-color: #f0f9ff; /* cyan-50 */
+             font-weight: 500;
+         }
+
+        /* Hero text shadow for readability */
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* No longer needed for SPA */
+        /*
+        main > section {
+            display: none; 
+            animation: fadeIn 0.4s ease-out;
+        }
+        main > section.active {
+            display: block; 
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        */
+
+        /* Dropdown style (if needed in future) */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Basic Testimonial Slider Styles */
+        .testimonial-slide {
+            display: none; /* Hide slides by default */
+            transition: opacity 0.5s ease-in-out;
+             position: absolute; /* Needed for positioning */
+             inset: 0; /* Make slides fill container */
+             padding-left: 1rem; /* Adjust padding if arrows overlap text */
+             padding-right: 1rem;
+             opacity: 0;
+        }
+        .testimonial-slide.active-slide {
+            display: block; /* Show active slide */
+            opacity: 1;
+             position: relative; /* Make active slide take space */
+        }
+
+        /* Specific styles for Accommodation Testimonials */
+        /* Note: This ID won't be on this page, but fine to keep */
+        #accommodation-testimonials blockquote::before {
+             content: '\201C'; /* Left double quotation mark */
+             font-size: 4rem;
+             color: #a5f3fc; /* Light cyan */
+             position: absolute;
+             left: -0.5rem;
+             top: -1.5rem;
+             line-height: 1;
+        }
+
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 w-full">
+        <nav>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <!-- Updated link to point to home.html -->
+                        <a href="home.html" class="nav-link" data-page="home">
+                            <h1 class="text-2xl font-bold text-gray-900">Eco House <span class="text-cyan-700">Mancora</span></h1>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation - UPDATED LINKS -->
+                    <div class="hidden md:flex md:items-center md:space-x-6">
+                        <a href="home.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="home">Home</a>
+                        <a href="accommodation.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="accommodation">Accommodation</a>
+                        <a href="surf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="surf">Surf</a>
+                        <a href="kitesurf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="kitesurf">Kitesurf</a>
+                        <a href="yoga.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="yoga">Yoga</a>
+                        <a href="restaurant.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="restaurant">Restaurant</a>
+                        <a href="location.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="location">Location</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="contact">Contact</a>
+                    </div>
+
+                    <!-- Book Now (Desktop) - Updated rounded corner -->
+                    <div class="hidden md:block">
+                        <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                            Book Now
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg id="hamburger-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu - UPDATED LINKS -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed top-20 left-0 w-full h-[calc(100vh-80px)] overflow-y-auto transform -translate-x-full z-40">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="home.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="home">Home</a>
+                    <a href="accommodation.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="accommodation">Accommodation</a>
+                    <a href="surf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="surf">Surf</a>
+                    <a href="kitesurf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="kitesurf">Kitesurf</a>
+                    <a href="yoga.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="yoga">Yoga</a>
+                    <a href="restaurant.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="restaurant">Restaurant</a>
+                    <a href="location.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="location">Location</a>
+                    <a href="contact.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="contact">Contact</a>
+                </div>
+                <!-- Book Now (Mobile) - Updated rounded corner -->
+                <div class="px-5 py-6">
+                    <a href="#" class="block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- =================== -->
+        <!--     HOME PAGE       -->
+        <!-- =================== -->
+        <section id="home"> <!-- Removed 'active' class, no longer needed -->
+            <!-- 1. Hero Section -->
+            <div class="relative bg-gray-900 h-[70vh] md:h-[90vh] flex items-center justify-center text-center text-white overflow-hidden">
+                <img src="https://placehold.co/1600x900/000000/FFFFFF?text=Eco+House+Hero+Image+(Surf/Yoga/Kite)" 
+                     loading="lazy"
+                     onerror="this.src='https://placehold.co/1600x900/333/FFF?text=Hero+Image+Missing'"
+                     alt="Aerial view of Eco House Mancora with surfing and yoga" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-60">
+                <div class="relative z-10 p-4">
+                    <h2 class="text-4xl md:text-6xl font-black hero-text-shadow uppercase tracking-wider">Your Eco-Friendly Escape</h2>
+                    <p class="mt-4 text-xl md:text-2xl font-light hero-text-shadow max-w-3xl mx-auto">Surf, Kitesurf, and Yoga on the stunning coast of Mancora, Peru. Your adventure begins at the Eco House.</p>
+                    <a href="#" class="mt-8 inline-block bg-cyan-700 text-white text-lg font-medium px-10 py-4 rounded-xl shadow-lg hover:bg-cyan-800 transition duration-300">
+                        Check Availability
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2. 3 Pillars Section -->
+            <div class="py-20 bg-gray-50"> 
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">Stay, Play, Unwind: Your Mancora Escape</h2> 
+                    <p class="text-xl text-center text-gray-600 max-w-3xl mx-auto mb-16">
+                        Discover world-class surf, kitesurfing, and yoga from our unique boutique hotel.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Surf -->
+                        <div class="group rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://placehold.co/600x400/0891b2/FFFFFF?text=Surf+Session" 
+                                 loading="lazy"
+                                 onerror="this.src='https://placehold.co/600x400/0891b2/FFF?text=Surf'"
+                                 alt="Surfer on a wave in Mancora" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white">
+                                <h3 class="text-2xl font-semibold mb-2">Surf</h3>
+                                <p class="text-gray-600 mb-4">Ride Mancora's legendary left-hand point breaks. From mellow beginner waves to peeling perfection, we offer lessons, rentals, and expert guiding.</p>
+                                <a href="surf.html" class="nav-link font-medium text-cyan-700 hover:text-cyan-900" data-page="surf">Learn More &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Kitesurf -->
+                        <div class="group rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://placehold.co/600x400/db2777/FFFFFF?text=Kitesurf+Sunset" 
+                                 loading="lazy"
+                                 onerror="this.src='https://placehold.co/600x400/db2777/FFF?text=Kite'"
+                                 alt="Kitesurfer in the air at sunset" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white">
+                                <h3 class="text-2xl font-semibold mb-2">Kitesurf</h3>
+                                <p class="text-gray-600 mb-4">Harness the consistent winds of Mancora Bay, a world-class kitesurfing destination. IKO certified lessons and rentals available for all levels.</p>
+                                <a href="kitesurf.html" class="nav-link font-medium text-cyan-700 hover:text-cyan-900" data-page="kitesurf">Learn More &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Yoga -->
+                        <div class="group rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://placehold.co/600x400/16a34a/FFFFFF?text=Yoga+Shala" 
+                                 loading="lazy"
+                                 onerror="this.src='https://placehold.co/600x400/16a34a/FFF?text=Yoga'"
+                                 alt="Yoga class in an open-air shala" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white">
+                                <h3 class="text-2xl font-semibold mb-2">Yoga</h3>
+                                <p class="text-gray-600 mb-4">Connect body and soul in our serene, open-air shala overlooking the Pacific. Daily classes and space for your personal practice await.</p>
+                                <a href="yoga.html" class="nav-link font-medium text-cyan-700 hover:text-cyan-900" data-page="yoga">Learn More &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. The Eco House Intro -->
+            <div class="py-20 bg-green-50"> 
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <span class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded-full uppercase">
+                                <i data-feather="leaf" class="w-4 h-4 mr-1.5"></i>                             
+                                Our Philosophy
+                            </span>
+                            <h2 class="text-3xl font-bold text-gray-900 mt-4 mb-4">More Than a Hotel. An Eco House.</h2>
+                            <p class="text-lg text-gray-600 mb-6">We built Eco House Mancora with sustainability at our core. Our construction uses recycled and local materials, minimizing impact while maximizing your connection with nature. We believe in conscious travel, where adventure and responsibility go hand-in-hand.</p>
+                             <p class="text-lg text-gray-600">Learn more about our commitment on the <a href="accommodation.html" class="nav-link font-medium text-cyan-700 hover:text-cyan-900" data-page="accommodation">Accommodation</a> page.</p>
+                        </div>
+                        <div class="rounded-xl shadow-xl overflow-hidden">
+                            <img src="https://placehold.co/600x500/14b8a6/FFFFFF?text=Eco-Friendly+Construction" 
+                                 loading="lazy"
+                                 onerror="this.src='https://placehold.co/600x500/14b8a6/FFF?text=Eco+Build'"
+                                 alt="Eco-friendly construction of the hotel" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Featured Rooms Section -->
+            <div class="py-20 bg-amber-50"> 
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Your Coastal Sanctuary</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Featured Room 1 -->
+                        <div class="group rounded-xl shadow-lg overflow-hidden flex flex-col">
+                            <img src="https://placehold.co/800x600/0e7490/FFFFFF?text=Ocean+View+Suite" 
+                                 loading="lazy"
+                                 onerror="this.src='https://placehold.co/800x600/CCC/FFF?text=Room+1'"
+                                 alt="Ocean View Suite" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white flex-grow">
+                                <h3 class="text-2xl font-semibold mb-2">Ocean View Suite</h3>
+                                <p class="text-gray-600 mb-4 flex-grow">Wake up to panoramic Pacific views from your private balcony. King bed, ensuite, pure bliss.</p>
+                                <a href="accommodation.html" class="nav-link font-medium text-cyan-700 hover:text-cyan-900" data-page="accommodation">View Details &rarr;</a>
+                            </div>
+                        </div>
+                        <!-- Featured Room 2 -->
+                        <div class="group rounded-xl shadow-lg overflow-hidden flex flex-col">
+                            <img src="https://placehold.co/800x600/10b981/FFFFFF?text=Garden+Bungalow" 
+                                 loading="lazy"
+                                 onerror="this.src='https://placehold.co/800x600/CCC/FFF?text=Room+2'"
+                                 alt="Garden Bungalow" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white flex-grow">
+                                <h3 class="text-2xl font-semibold mb-2">Garden Bungalow</h3>
+                                <p class="text-gray-600 mb-4 flex-grow">Your private retreat nestled in our lush gardens. Queen bed, terrace, perfect tranquility.</p>
+                                <a href="accommodation.html" class="nav-link font-medium text-cyan-700 hover:text-cyan-900" data-page="accommodation">View Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-12">
+                         <a href="accommodation.html" class="nav-link inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-xl shadow-sm text-gray-700 bg-white hover:bg-gray-50 transition duration-150 ease-in-out" data-page="accommodation">
+                             See All Accommodations
+                         </a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- 5. Testimonial Slider -->
+            <div class="py-20 bg-cyan-800 text-white overflow-hidden"> 
+                <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+                    <h2 class="text-3xl font-bold mb-8">What Our Guests Say</h2>
+                    
+                    <div id="testimonial-slider" class="relative min-h-[150px] sm:min-h-[180px]"> 
+                        <!-- Slide 1 -->
+                        <div class="testimonial-slide active-slide"> 
+                            <blockquote class="text-xl md:text-2xl font-light italic leading-relaxed">
+                                "An absolute paradise. I came for the surfing and was blown away by the hospitality, the incredible food, and the yoga classes at sunset. The 'Eco House' concept is real - you can feel the good energy. I'll be back every year!"
+                            </blockquote>
+                            <cite class="block mt-6 text-lg font-medium">
+                                - Alex R.
+                                <span class="block text-sm font-normal text-cyan-200">Guest from California</span>
+                            </cite>
+                        </div>
+                         <!-- Slide 2 -->
+                        <div class="testimonial-slide">
+                            <blockquote class="text-xl md:text-2xl font-light italic leading-relaxed">
+                                "Perfect spot for kitesurfing right out front! The staff are amazing, rooms are clean and beautiful. Loved the eco-friendly touches everywhere. Highly recommended."
+                            </blockquote>
+                            <cite class="block mt-6 text-lg font-medium">
+                                - Sarah K.
+                                <span class="block text-sm font-normal text-cyan-200">Guest from Germany</span>
+                            </cite>
+                        </div>
+                         <!-- Slide 3 -->
+                        <div class="testimonial-slide">
+                            <blockquote class="text-xl md:text-2xl font-light italic leading-relaxed">
+                                "The yoga shala is magical. Starting the day with sun salutations overlooking the ocean was unforgettable. So peaceful and rejuvenating."
+                            </blockquote>
+                            <cite class="block mt-6 text-lg font-medium">
+                                - Ben T.
+                                <span class="block text-sm font-normal text-cyan-200">Guest from Canada</span>
+                            </cite>
+                        </div>
+                        <!-- Slide 4 -->
+                         <div class="testimonial-slide">
+                            <blockquote class="text-xl md:text-2xl font-light italic leading-relaxed">
+                                "Incredible food at Nourish restaurant! Some of the best ceviche I had in Peru. Plus, the included breakfast was delicious and healthy every morning."
+                            </blockquote>
+                            <cite class="block mt-6 text-lg font-medium">
+                                - Maria G.
+                                <span class="block text-sm font-normal text-cyan-200">Guest from Peru</span>
+                            </cite>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div class="testimonial-slide">
+                            <blockquote class="text-xl md:text-2xl font-light italic leading-relaxed">
+                                "Loved the balance between being close to town but far enough for peace and quiet. The walk to the surf break is super easy. Great location!"
+                            </blockquote>
+                            <cite class="block mt-6 text-lg font-medium">
+                                - David L.
+                                <span class="block text-sm font-normal text-cyan-200">Guest from Australia</span>
+                            </cite>
+                        </div>
+                        <!-- Slide 6 -->
+                        <div class="testimonial-slide">
+                            <blockquote class="text-xl md:text-2xl font-light italic leading-relaxed">
+                                "Beautifully designed hotel that truly cares about sustainability. You can feel the positive vibe. Friendly staff made us feel right at home."
+                            </blockquote>
+                            <cite class="block mt-6 text-lg font-medium">
+                                - Chloe P.
+                                <span class="block text-sm font-normal text-cyan-200">Guest from France</span>
+                            </cite>
+                        </div>
+                    </div>
+
+                    <!-- Slider Arrows -->
+                    <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 p-2 text-white/50 hover:text-white focus:outline-none z-10"> 
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 p-2 text-white/50 hover:text-white focus:outline-none z-10"> 
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. Enhanced Location Highlight Section -->
+            <div class="py-20 bg-amber-50 text-center"> 
+               <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                   <h2 class="text-3xl font-bold text-gray-900 mb-4">Perfectly Placed for Peace & Play</h2>
+                   <p class="text-lg text-gray-600 mb-10">
+                       Nestled in tranquil Las Pocitas, we offer a peaceful retreat just steps from the action.
+                   </p>
+                   <!-- Location Icons -->
+                   <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-10">
+                       <div class="flex flex-col items-center">
+                            <i data-feather="wind" class="w-10 h-10 text-cyan-700 mb-2"></i> 
+                            <h4 class="font-semibold text-gray-800">Kitesurf Spot</h4>
+                            <p class="text-gray-600">Right Out Front (10 steps!)</p>
+                       </div>
+                       <div class="flex flex-col items-center">
+                            <i data-feather="anchor" class="w-10 h-10 text-cyan-700 mb-2"></i> 
+                            <h4 class="font-semibold text-gray-800">Main Surf Break</h4>
+                            <p class="text-gray-600">Easy 5-Min Walk</p>
+                       </div>
+                       <div class="flex flex-col items-center">
+                            <i data-feather="coffee" class="w-10 h-10 text-cyan-700 mb-2"></i> 
+                            <h4 class="font-semibold text-gray-800">Mancora Town</h4>
+                            <p class="text-gray-600">Short Stroll to Cafes</p>
+                       </div>
+                   </div>
+                   <a href="location.html" class="nav-link inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-xl shadow-sm text-gray-700 bg-white hover:bg-gray-100 transition duration-150 ease-in-out" data-page="location">
+                       Explore the Area
+                   </a>
+               </div>
+            </div>
+
+            <!-- 7. Restaurant Teaser Section -->
+            <div class="py-20 bg-white"> 
+                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                         <div class="md:col-span-1 rounded-xl shadow-xl overflow-hidden"> 
+                             <img src="https://placehold.co/600x400/d946ef/FFFFFF?text=Fresh+Local+Food" 
+                                  loading="lazy"
+                                  onerror="this.src='https://placehold.co/600x400/d946ef/FFF?text=Food+Teaser'"
+                                  alt="Delicious healthy food served at the restaurant" class="w-full h-full object-cover aspect-[3/2]">
+                         </div>
+                         <div class="md:col-span-2"> 
+                             <h2 class="text-3xl font-bold text-gray-900 mb-4">Fresh & Local Dining On-Site</h2>
+                             <p class="text-lg text-gray-600 mb-6">
+                                 Fuel your adventures at Nourish, our renowned restaurant known for blending fresh Peruvian ingredients with healthy international flavors.
+                             </p>
+                             <a href="restaurant.html" class="nav-link text-lg font-medium text-cyan-700 hover:text-cyan-900" data-page="restaurant">Explore the Menu &rarr;</a>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Expanded Gallery Section -->
+            <div class="py-20 bg-gray-50"> 
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">A Glimpse of Your Sanctuary</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"> 
+                        <img src="https://placehold.co/600x450/D8DEE9/4C566A?text=Ambiance+1" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Relaxing ambiance at Eco House Mancora" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                        <img src="https://placehold.co/600x450/E5E9F0/4C566A?text=Beach+View" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="View of the beach from the hotel" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                        <img src="https://placehold.co/600x450/ECEFF4/4C566A?text=Garden+Space" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Lush garden area at the hotel" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                        <img src="https://placehold.co/600x450/0891b2/FFFFFF?text=Surf+Lifestyle" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Surfing lifestyle shot near Mancora" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https://placehold.co/600x450/db2777/FFFFFF?text=Kite+Action" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Kitesurfing action shot" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https://placehold.co/600x450/16a34a/FFFFFF?text=Yoga+Pose" loading="lazy" onerror="this.src='https://placehold.co/600x450/CCC/FFF?text=Image'" alt="Yoga pose in the shala" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="httpsG" loading="lazy" onerror="this.src='https://placehold.co/600x450/d946ef/FFF?text=Image'" alt="Cocktail at sunset" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https" loading="lazy" onerror="this.src='https://placehold.co/600x450/f59e0b/FFF?text=Image'" alt="Detail shot of a room's decor" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https" loading="lazy" onerror="this.src='https://placehold.co/600x450/3b82f6/FFF?text=Image'" alt="Pool area at Eco House" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                         <img src="https" loading="lazy" onerror="this.src='https://placehold.co/600x450/ef4444/FFF?text=Image'" alt="Vibrant street in Mancora town" class="rounded-xl shadow-md w-full h-full object-cover aspect-[4/3]">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Dual Call to Action -->
+            <div class="relative py-24 bg-gray-800 text-center"> 
+                 <img src="https://placehold.co/1600x500/000000/FFFFFF?text=Mancora+Sunset+View" 
+                      loading="lazy"
+                      onerror="this.src='https://placehold.co/1600x500/333/FFF?text=CTA+Background'"
+                      alt="Sunset over the ocean in Mancora"
+                      class="absolute inset-0 w-full h-full object-cover opacity-40"> 
+                 
+                 <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                     <h2 class="text-4xl font-bold text-white mb-4 hero-text-shadow">Your Mancora Adventure Starts Here</h2> 
+                     <p class="text-xl text-cyan-100 mb-8 hero-text-shadow">
+                          Find your perfect eco-friendly room and start planning your surf, kite, or yoga journey on Peru's stunning coast. Our team is ready to help.
+                     </p>
+                     <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                         <a href="#" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 border border-transparent text-lg font-medium rounded-xl shadow-sm text-white bg-cyan-600 hover:bg-cyan-700 transition duration-150 ease-in-out">
+                             Book Your Stay
+                         </a>
+                         <a href="contact.html" class="nav-link inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 border border-white text-lg font-medium rounded-xl shadow-sm text-white bg-black/20 hover:bg-black/40 transition duration-150 ease-in-out" data-page="contact">
+                             Ask a Question
+                         </a>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- All other sections (accommodation, surf, etc.) are REMOVED from this file -->
+
+    </main>
+
+    <!-- Footer - UPDATED LINKS -->
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Eco House Mancora</h3>
+                    <p class="text-sm">Your eco-friendly home for surf, kitesurf, and yoga in the heart of Peru's northern coast. Adventure and relaxation await.</p>
+                    <!-- NEW 1% for the Ocean -->
+                    <p class="text-sm mt-4 flex items-start">
+                        <i data-feather="heart" class="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0" style="margin-top: 0.125rem;"></i>
+                        <span>We proudly donate 1% of our benefits to Ocean Protection NGO's.</span>
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accommodation.html" class="nav-link text-sm hover:text-white" data-page="accommodation">Accommodation</a></li>
+                        <li><a href="restaurant.html" class="nav-link text-sm hover:text-white" data-page="restaurant">Restaurant</a></li>
+                        <li><a href="location.html" class="nav-link text-sm hover:text-white" data-page="location">Location</a></li>
+                    </ul>
+                </div>
+                <!-- Experiences -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Experiences</h3>
+                    <ul class="space-y-2">
+                        <li><a href="surf.html" class="nav-link text-sm hover:text-white" data-page="surf">Surf</a></li>
+                        <li><a href="kitesurf.html" class="nav-link text-sm hover:text-white" data-page="kitesurf">Kitesurf</a></li>
+                        <li><a href="yoga.html" class="nav-link text-sm hover:text-white" data-page="yoga">Yoga</a></li>
+                    </ul>
+                </div>
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="nav-link text-sm hover:text-white" data-page="contact">Contact Us</a></li>
+                        <!-- Social Icons -->
+                        <li class="flex items-center space-x-3 pt-1"> 
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Instagram</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.067-.06-1.407-.06-4.123v-.08c0-2.643.012-2.987.06-4.043.049 1.064.218 1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Facebook</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </li>
+                         <li class="pt-2">
+                             <span class="text-sm text-cyan-200">Tripadvisor Travellers' Choice</span>
+                             <!-- 
+                                 IMAGE PLACEHOLDER: 
+                                 Replace this comment with your <img> tag for the Tripadvisor award.
+                                 e.g., <img src="URL_TO_YOUR_AWARD_IMAGE.png" alt="Tripadvisor Travellers Choice" class="w-24 h-auto mt-1">
+                             -->
+                         </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
+                <p>&copy; <span id="current-year"></span> Eco House Mancora. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- =================== -->
+    <!-- JAVASCRIPT LOGIC   -->
+    <!-- =================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            function openMobileMenu() {
+                if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.remove('hidden', '-translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                    hamburgerIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            function closeMobileMenu() {
+                 if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.add('-translate-x-full');
+                    mobileMenu.classList.remove('translate-x-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300); // Wait for transition
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                 }
+            }
+
+            if (mobileMenuButton) { // Check if button exists
+                mobileMenuButton.addEventListener('click', () => {
+                    const isMenuOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    if (isMenuOpen) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            } else {
+                console.error("Mobile menu button not found. Check HTML ID: mobile-menu-button");
+            }
+
+            // --- Mobile Nav Link Click Logic ---
+            // Close menu when a link is clicked
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenuButton && mobileMenuButton.getAttribute('aria-expanded') === 'true') {
+                        closeMobileMenu();
+                    }
+                });
+            });
+
+             // --- Testimonial Slider Logic ---
+             const sliderContainer = document.getElementById('testimonial-slider'); 
+             if (sliderContainer) {
+                 const slides = sliderContainer.querySelectorAll('.testimonial-slide');
+                 const prevButton = document.getElementById('prev-testimonial');
+                 const nextButton = document.getElementById('next-testimonial');
+                 let currentSlide = 0;
+
+                 function showSlide(index) {
+                     if(index < 0 || index >= slides.length || slides.length === 0) {
+                         return;
+                     }
+                     slides.forEach((slide, i) => {
+                         if (i === index) {
+                             slide.classList.add('active-slide');
+                         } else {
+                             slide.classList.remove('active-slide');
+                         }
+                     });
+                 }
+
+                 function nextSlide() {
+                     if (slides.length > 0) {
+                         currentSlide = (currentSlide + 1) % slides.length;
+                         showSlide(currentSlide);
+                     }
+                 }
+
+                 function prevSlide() {
+                      if (slides.length > 0) {
+                         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                         showSlide(currentSlide);
+                      }
+                 }
+
+                 if (prevButton && nextButton && slides.length > 0) { 
+                     prevButton.addEventListener('click', prevSlide);
+                     nextButton.addEventListener('click', nextSlide);
+                     showSlide(currentSlide); 
+                 } else {
+                      if (!prevButton || !nextButton) {
+                        console.warn("Testimonial slider buttons not found. Check IDs: prev-testimonial, next-testimonial");
+                      }
+                      if (slides.length === 0) {
+                         console.warn("No testimonial slides found within #testimonial-slider");
+                      }
+                 }
+             }
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if(currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+            
+            // Initialize Feather Icons
+            function initializeFeatherIcons() {
+                try {
+                    if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                        feather.replace();
+                    } else {
+                        setTimeout(() => {
+                             if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                                 feather.replace();
+                             } else {
+                                  console.error("Feather icons library (feather) is not loaded or not defined correctly after delay.");
+                             }
+                        }, 500);
+                    }
+                } catch (e) {
+                    console.error("Feather icons failed to initialize:", e);
+                }
+            }
+            
+            initializeFeatherIcons(); // Call it once on load
+        });
+    </script>
+
+</body>
+</html>
