@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surf - Eco House Mancora</title> <!-- Updated Title -->
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter (body) and Poppins (headings) fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
+    <!-- Load Feather Icons -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Apply Poppins to headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+         main section .font-black { /* Banner headings */
+             font-weight: 900;
+         }
+         main h2, footer h3 { /* Section titles */
+            font-weight: 700;
+         }
+         main h3, main h4 { /* Card/item titles */
+            font-weight: 600;
+         }
+
+        /* Active nav link style */
+        .nav-link.active, .nav-link-mobile.active {
+            color: #0c4a6e; /* Tailwind cyan-900 */
+            font-weight: 500;
+        }
+         .nav-link-mobile.active {
+             background-color: #f0f9ff; /* cyan-50 */
+         }
+
+        /* Hero text shadow for readability */
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Fade in animation for page content */
+        main > section {
+             animation: fadeIn 0.4s ease-out;
+        }
+         @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Specific styles for Surf Experience cards */
+        .surf-experience-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .surf-experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800"> <!-- Changed default bg to gray-50 to match section -->
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 w-full">
+        <nav>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="home.html" class="nav-link" data-page="home">
+                            <h1 class="text-2xl font-bold text-gray-900">Eco House <span class="text-cyan-700">Mancora</span></h1>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation - Links updated -->
+                    <div class="hidden md:flex md:items-center md:space-x-6">
+                        <a href="home.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="home">Home</a>
+                        <a href="accommodation.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="accommodation">Accommodation</a>
+                        <a href="surf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="surf">Surf</a>
+                        <a href="kitesurf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="kitesurf">Kitesurf</a>
+                        <a href="yoga.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="yoga">Yoga</a>
+                        <a href="restaurant.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="restaurant">Restaurant</a>
+                        <a href="location.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="location">Location</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="contact">Contact</a>
+                    </div>
+
+                    <!-- Book Now (Desktop) -->
+                    <div class="hidden md:block">
+                        <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                            Book Now
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg id="hamburger-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu - Links updated -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed top-20 left-0 w-full h-[calc(100vh-80px)] overflow-y-auto transform -translate-x-full z-40">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="home.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="home">Home</a>
+                    <a href="accommodation.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="accommodation">Accommodation</a>
+                    <a href="surf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="surf">Surf</a>
+                    <a href="kitesurf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="kitesurf">Kitesurf</a>
+                    <a href="yoga.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="yoga">Yoga</a>
+                    <a href="restaurant.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="restaurant">Restaurant</a>
+                    <a href="location.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="location">Location</a>
+                    <a href="contact.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="contact">Contact</a>
+                </div>
+                <!-- Book Now (Mobile) -->
+                <div class="px-5 py-6">
+                    <a href="#" class="block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        
+        <!-- =================== -->
+        <!-- SURF PAGE      -->
+        <!-- =================== -->
+        <section id="surf" class="bg-gray-50"> 
+            <!-- Page Banner -->
+            <div class="relative bg-gray-900 h-48 md:h-64 flex items-center justify-center text-center text-white overflow-hidden">
+                <img src="https://placehold.co/1600x400/0891b2/FFFFFF?text=Surfing" 
+                     loading="lazy"
+                     onerror="this.src='https://placehold.co/1600x400/333/FFF?text=Image+Missing'"
+                     alt="Surfer riding a wave in Mancora" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-50">
+                <div class="relative z-10 p-4">
+                    <!-- Heading uses Poppins Black -->
+                    <h2 class="text-4xl md:text-5xl font-black hero-text-shadow uppercase tracking-wider">
+                        Catch the Perfect Wave
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                     <!-- Updated Intro Text -->
+                    <p class="text-xl text-center text-gray-600 max-w-3xl mx-auto -mt-4 mb-16">Mancora offers legendary waves right on our doorstep and access to the diverse breaks of Peru's North Shore. From beginner lessons to immersive surf camps and guided trips, we have your surfing adventure covered.</p>
+
+                    <!-- START: NEW Your Mancora Surf Experience (Overview) -->
+                    <div class="mb-16">
+                        <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Your Mancora Surf Experience</h2>
+                        <!-- This grid is now 1-col on small, 2-col on med, 4-col on large -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto text-center">
+                            <!-- Card 1: Surf Trips -->
+                            <div class="surf-experience-card group relative rounded-xl shadow-xl overflow-hidden h-80">
+                                <img src="https://placehold.co/600x800/15803d/FFFFFF?text=Surf+Trip" loading="lazy" onerror="this.src='https://placehold.co/600x800/15803d/FFF?text=Surf+Trip'" alt="Surf trip van" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors"></div>
+                                <div class="relative z-10 flex flex-col justify-end h-full p-6 text-white">
+                                    <h4 class="text-2xl font-semibold mb-2">Surf Trips</h4>
+                                    <p class="text-sm text-gray-200">Based in Mancora, take daily trips to discover all the spots of the north shore with a cool local guide.</p>
+                                </div>
+                            </div>
+                            <!-- Card 2: Surfing Lessons -->
+                            <div class="surf-experience-card group relative rounded-xl shadow-xl overflow-hidden h-80">
+                                <img src="https://placehold.co/600x800/0891b2/FFFFFF?text=Surf+Lesson" loading="lazy" onerror="this.src='https://placehold.co/600x800/0891b2/FFF?text=Surf+Lesson'" alt="Surfing lesson in the water" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors"></div>
+                                <div class="relative z-10 flex flex-col justify-end h-full p-6 text-white">
+                                    <h4 class="text-2xl font-semibold mb-2">Surfing Lessons</h4>
+                                    <p class="text-sm text-gray-200">Live in front of Mancora's spot, a perfect wave to learn how to surf with cool locals!</p>
+                                </div>
+                            </div>
+                            <!-- Card 3: Surf Coaching -->
+                            <div class="surf-experience-card group relative rounded-xl shadow-xl overflow-hidden h-80">
+                                <img src="https://placehold.co/600x800/be123c/FFFFFF?text=Pro+Coaching" loading="lazy" onerror="this.src='https://placehold.co/600x800/be123c/FFF?text=Pro+Coaching'" alt="Advanced surf coaching" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors"></div>
+                                <div class="relative z-10 flex flex-col justify-end h-full p-6 text-white">
+                                    <h4 class="text-2xl font-semibold mb-2">Surf Coaching w/ a Pro</h4>
+                                    <p class="text-sm text-gray-200">Already an intermediate? Go to the next level with a pro surfer and learn from his video coaching.</p>
+                                </div>
+                            </div>
+                            <!-- Card 4: Surf & Yoga -->
+                            <div class="surf-experience-card group relative rounded-xl shadow-xl overflow-hidden h-80">
+                                <img src="https://placehold.co/600x800/16a34a/FFFFFF?text=Surf+&+Yoga" loading="lazy" onerror="this.src='https://placehold.co/600x800/16a34a/FFF?text=Surf+&+Yoga'" alt="Yoga on the beach" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-colors"></div>
+                                <div class="relative z-10 flex flex-col justify-end h-full p-6 text-white">
+                                    <h4 class="text-2xl font-semibold mb-2">Surf & Yoga</h4>
+                                    <p class="text-sm text-gray-200">The perfect combination! Strengthen your body and mind and help your surfing thanks to yoga sessions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Board Rental Note -->
+                        <p class="text-center text-gray-600 mt-10 text-sm italic">
+                            A full range of board rentals (soft-tops, longboards, funboards, shortboards) is available on-site.
+                        </p>
+                    </div>
+                    <!-- END: NEW Your Mancora Surf Experience (Overview) -->
+                    
+                    <!-- START: NEW World-Class Conditions & Spots (RESTRUCTURED) -->
+                    <div class="my-20 py-16 bg-cyan-700 text-white rounded-xl shadow-lg">
+                        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                            
+                            <h2 class="text-3xl font-bold mb-10">The Surf Conditions.</h2>
+
+                            <!-- NEW 2-Column Grid for Icons -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12 max-w-2xl mx-auto">
+                                <!-- Water Temperature -->
+                                <div>
+                                    <i data-feather="thermometer" class="w-12 h-12 text-white mx-auto mb-4"></i>
+                                    <h4 class="text-2xl font-semibold text-white mb-2">Water Temperature</h4>
+                                    <p class="text-lg text-cyan-100">
+                                        Enjoy warm waters year-round (approx. 20-25°C / 68-77°F). Boardshorts or a light top are all you need!
+                                    </p>
+                                </div>
+                                <!-- Swell Conditions -->
+                                <div>
+                                    <!-- Wave Icon -->
+                                    <svg class="w-12 h-12 mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 60 40" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 30 C15 26, 20 26, 25 30 S35 34, 40 30 S50 26, 55 30"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 24 C15 20, 20 20, 25 24 S35 28, 40 24 S50 20, 55 24"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 18 C15 14, 20 14, 25 18 S35 22, 40 18 S50 14, 55 18"></path>
+                                    </svg>
+                                    <h4 class="text-2xl font-semibold text-white mb-2">Swell Conditions</h4>
+                                    <p class="text-lg text-cyan-100">
+                                        The Peruvian Northshore receives both north and south swells, allowing a huge variety of spots and conditions year-round.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Divider -->
+                            <div class="w-24 h-1 bg-cyan-500 mx-auto rounded-full"></div>
+
+                            <!-- List of Spots -->
+                            <h3 class="text-2xl font-bold text-white mt-12 mb-4">World-Class Spots Nearby</h3>
+                            <p class="text-lg text-cyan-100 max-w-3xl mx-auto">
+                                Here is a non-exhaustive list of spots where you may ride: <strong class="text-white">El Ñuro, El Golf, el Muelle, baterías, Negritos, Punta Balcones, Lobitos, Piscinas, Peña redonda, La Cruz, Caleta Grau, La Frontera, Cabo Blanco, Panic Point. Etc.</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- END: NEW World-Class Conditions & Spots -->
+
+
+                    <!-- Lessons & Coaching -->
+                    <div class="flex flex-col md:flex-row-reverse items-center bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+                        <div class="md:w-1/2">
+                             <img src="https://placehold.co/800x600/0891b2/FFFFFF?text=Surf+Coaching" 
+                                  loading="lazy"
+                                  onerror="this.src='https://placehold.co/800x600/0891b2/FFF?text=Lesson'"
+                                  alt="Surf instructor coaching a student" class="w-full h-80 md:h-full object-cover">
+                        </div>
+                        <div class="md:w-1/2 p-8 md:p-12">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Lessons & Coaching for All Levels</h3> 
+                            <p class="text-gray-600 mb-6">Learn or improve with our experienced local instructors, focusing on safety, fun, and progression right here in Mancora.</p>
+                            <ul class="space-y-3 mb-8 text-gray-700">
+                                <li><strong class="font-medium text-gray-900">Beginner Lessons:</strong> Master the basics of paddling, pop-ups, and wave etiquette.</li>
+                                <li><strong class="font-medium text-gray-900">Intermediate Coaching:</strong> Improve technique, wave reading, and start carving turns.</li>
+                                <li><strong class="font-medium text-gray-900">Pro Coaching:</strong> Take your skills to the next level with advanced techniques and personalized <strong class="text-cyan-800">video analysis</strong>.</li>
+                            </ul>
+                             <p class="text-sm text-gray-500 italic">Lessons available as add-ons when booking your stay.</p>
+                        </div>
+                    </div>
+
+                    <!-- Explore the North Shore: Surf Trips -->
+                     <div class="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+                        <div class="md:w-1/2">
+                             <img src="https://placehold.co/800x600/15803d/FFFFFF?text=Surf+Trip+Van" 
+                                  loading="lazy"
+                                  onerror="this.src='https://placehold.co/800x600/15803d/FFF?text=Surf+Trip'"
+                                  alt="Van loaded with surfboards near a beach" class="w-full h-80 md:h-full object-cover">
+                        </div>
+                        <div class="md:w-1/2 p-8 md:p-12">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Discover More Waves: Guided Surf Trips</h3>
+                            <p class="text-gray-600 mb-6">Explore the legendary Peruvian North Shore beyond Mancora. Join our guided daily trips to discover a variety of surf breaks.</p>
+                            <ul class="space-y-3 mb-8 text-gray-700">
+                                 <li><i data-feather="map-pin" class="inline w-5 h-5 mr-2 text-cyan-700"></i>Access diverse spots like Lobitos, Cabo Blanco, El Nuro, and more.</li>
+                                 <li><i data-feather="users" class="inline w-5 h-5 mr-2 text-cyan-700"></i>Benefit from local expert guides who find the best waves based on daily conditions.</li>
+                                 <li><i data-feather="truck" class="inline w-5 h-5 mr-2 text-cyan-700"></i>Comfortable transport and support included.</li>
+                            </ul>
+                             <p class="text-sm text-gray-500 italic">Inquire about daily surf trips when booking or upon arrival.</p>
+                        </div>
+                    </div>
+
+                    <!-- Immersive Surf Camps at Eco House -->
+                     <div class="flex flex-col md:flex-row-reverse items-center bg-white rounded-xl shadow-lg overflow-hidden mb-12">
+                        <div class="md:w-1/2">
+                             <img src="https://placehold.co/800x600/be123c/FFFFFF?text=Surf+Camp+Lifestyle" 
+                                  loading="lazy"
+                                  onerror="this.src='https://placehold.co/800x600/be123c/FFF?text=Camp+Life'"
+                                  alt="Surfers relaxing after a session at Eco House" class="w-full h-80 md:h-full object-cover">
+                        </div>
+                        <div class="md:w-1/2 p-8 md:p-12">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Stay & Surf: Our Camp Experience</h3>
+                            <p class="text-gray-600 mb-6">Immerse yourself completely! Eco House is the proud home base for dedicated Surf Camps, perfect for focusing on your progression in a supportive, fun environment.</p>
+                             <p class="text-gray-600 mb-6">Our camp philosophy centers around: <strong class="text-cyan-800">Good waves, simple moments, low environmental impact, and a healthy lifestyle.</strong></p>
+                            <ul class="space-y-3 mb-8 text-gray-700">
+                                 <li><i data-feather="home" class="inline w-5 h-5 mr-2 text-cyan-700"></i>Packages include accommodation right here at Eco House Mancora.</li>
+                                 <li><i data-feather="coffee" class="inline w-5 h-5 mr-2 text-cyan-700"></i>Enjoy healthy daily breakfasts to fuel your sessions.</li>
+                                 <li><i data-feather="award" class="inline w-5 h-5 mr-2 text-cyan-700"></i>Options combine lessons, coaching, board rentals, and even yoga.</li>
+                            </ul>
+                             <p class="text-sm text-gray-500 italic">Explore full camp details via the link below.</p>
+                        </div>
+                    </div>
+
+                    <!-- The Mancora Surf Lifestyle -->
+                    <div class="my-16 text-center max-w-3xl mx-auto">
+                         <i data-feather="sunrise" class="w-12 h-12 text-amber-500 mx-auto mb-4"></i>
+                         <h3 class="text-3xl font-bold text-gray-900 mb-4">The Mancora Surf Lifestyle</h3>
+                         <p class="text-lg text-gray-600">
+                             Wake up, check the waves from your room, and surf the point break just steps away. Refuel with a healthy breakfast, join a surf trip or yoga session, or simply relax by the pool. In the evening, enjoy fresh local food at Nourish or explore the vibrant restaurants and Pisco Sour bars in Mancora town. Repeat!
+                         </p>
+                    </div>
+
+                    <!-- START: Call to Action Section (Refined & Enhanced with Image) -->
+                     <div class="bg-gradient-to-r from-cyan-600 to-blue-700 text-white rounded-xl shadow-xl overflow-hidden mt-16">
+                         <div class="grid grid-cols-1 md:grid-cols-2 items-center">
+                             <!-- Text Column -->
+                             <div class="p-8 md:p-12 text-center md:text-left order-2 md:order-1">
+                                 <h2 class="text-3xl font-bold mb-4">Ready to Surf? Full Details & Booking</h2>
+                                 <p class="text-lg max-w-2xl mx-auto md:mx-0 mb-6">
+                                    All surf lessons, coaching, trips, and camps are run by our expert partners, Wild Surf Peru, based right here at Eco House Mancora.
+                                 </p>
+                                 <p class="text-lg max-w-2xl mx-auto md:mx-0 mb-8">
+                                     You can add surf packages, lessons, or rentals as optional extras when booking your accommodation online. Alternatively, arrange your activities upon arrival or <a href="contact.html" class="nav-link font-semibold underline hover:text-cyan-200" data-page="contact">contact us</a> with any questions.
+                                 </p>
+                                 <a href="https://wild-kitesurf-peru.com/mancora-surf-camp/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-blue-700 bg-white hover:bg-gray-100 transition duration-150 ease-in-out">
+                                      Explore Surf Camps & Trips 
+                                      <i data-feather="external-link" class="w-4 h-4 ml-2"></i>
+                                 </a>
+                             </div>
+                             <!-- Image Column -->
+                             <div class="order-1 md:order-2">
+                                 <img src="https://placehold.co/800x600/0369a1/FFFFFF?text=Surf+Action+Shot"
+                                      loading="lazy"
+                                      onerror="this.src='https://placehold.co/800x600/0369a1/FFF?text=Surf+With+Us'"
+                                      alt="Surfer in action on a wave"
+                                      class="w-full h-64 md:h-full object-cover">
+                             </div>
+                         </div>
+                     </div>
+                    <!-- END: Call to Action Section -->
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer - Links updated -->
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Eco House Mancora</h3>
+                    <p class="text-sm">Your eco-friendly home for surf, kitesurf, and yoga in the heart of Peru's northern coast. Adventure and relaxation await.</p>
+                    <p class="text-sm mt-4 flex items-start">
+                        <i data-feather="heart" class="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0" style="margin-top: 0.125rem;"></i>
+                        <span>We proudly donate 1% of our benefits to Ocean Protection NGO's.</span>
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accommodation.html" class="nav-link text-sm hover:text-white" data-page="accommodation">Accommodation</a></li>
+                        <li><a href="restaurant.html" class="nav-link text-sm hover:text-white" data-page="restaurant">Restaurant</a></li>
+                        <li><a href="location.html" class="nav-link text-sm hover:text-white" data-page="location">Location</a></li>
+                    </ul>
+                </div>
+                <!-- Experiences -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Experiences</h3>
+                    <ul class="space-y-2">
+                        <li><a href="surf.html" class="nav-link text-sm hover:text-white" data-page="surf">Surf</a></li>
+                        <li><a href="kitesurf.html" class="nav-link text-sm hover:text-white" data-page="kitesurf">Kitesurf</a></li>
+                        <li><a href="yoga.html" class="nav-link text-sm hover:text-white" data-page="yoga">Yoga</a></li>
+                    </ul>
+                </div>
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="nav-link text-sm hover:text-white" data-page="contact">Contact Us</a></li>
+                        <!-- Social Icons -->
+                        <li class="flex items-center space-x-3 pt-1"> 
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Instagram</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.067-.06-1.407-.06-4.123v-.08c0-2.643.012-2.987.06-4.043.049 1.064.218 1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Facebook</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
+                            </a>
+                        </li>
+                         <li class="pt-2">
+                             <span class="text-sm text-cyan-200">Tripadvisor Travellers' Choice</span>
+                             <!-- Tripadvisor Placeholder -->
+                         </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
+                <p>&copy; <span id="current-year"></span> Eco House Mancora. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =================== -->
+    <!-- JAVASCRIPT LOGIC   -->
+    <!-- =================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            function openMobileMenu() {
+                if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.remove('hidden', '-translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                    hamburgerIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            function closeMobileMenu() {
+                 if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.add('-translate-x-full');
+                    mobileMenu.classList.remove('translate-x-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300); // Wait for transition
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                 }
+            }
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isMenuOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    if (isMenuOpen) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            } else {
+                console.error("Mobile menu button not found.");
+            }
+
+             // --- Mobile Nav Link Click Logic ---
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenuButton && mobileMenuButton.getAttribute('aria-expanded') === 'true') {
+                        closeMobileMenu();
+                    }
+                });
+            });
+
+            // --- Set Active Nav Link Based on URL ---
+            const currentPage = window.location.pathname.split('/').pop() || 'home.html'; 
+            const pageName = currentPage.replace('.html', ''); 
+            
+            const desktopLinks = document.querySelectorAll('header .hidden.md\\:flex a.nav-link');
+            const mobileLinks = document.querySelectorAll('#mobile-menu a.nav-link-mobile');
+
+            function setActiveLink(links) {
+                links.forEach(link => {
+                    const linkPage = link.dataset.page;
+                    // Highlight if the link's data-page matches the current page name
+                    if (linkPage === pageName || (pageName === 'home' && linkPage === 'home') ) { 
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+            setActiveLink(desktopLinks);
+            setActiveLink(mobileLinks);
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if(currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+            
+            // Initialize Feather Icons
+            function initializeFeatherIcons() {
+                try {
+                    if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                        feather.replace();
+                    } else {
+                        setTimeout(() => {
+                             if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                                 feather.replace();
+                             } else {
+                                  console.error("Feather icons library (feather) not loaded after delay.");
+                             }
+                        }, 500);
+                    }
+                } catch (e) {
+                    console.error("Feather icons failed to initialize:", e);
+                }
+            }
+            
+            initializeFeatherIcons(); // Call it once on load
+        });
+    </script>
+
+</body>
+</html>
