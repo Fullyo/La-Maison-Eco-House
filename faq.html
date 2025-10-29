@@ -65,19 +65,19 @@
 
         /* --- Accordion Styles --- */
         details {
-            background-color: #ffffff; /* white */
-            border-radius: 0.75rem; /* rounded-xl */
-            margin-bottom: 1rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-md */
-            border: 1px solid #e5e7eb; /* gray-200 */
+            /* Now styled within the section wrapper, no background/shadow here */
+            border-bottom: 1px solid #e5e7eb; /* gray-200 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            overflow: hidden; /* Prevent content overflow */
         }
-        details[open] {
-             border-color: #a5f3fc; /* cyan-200 */
-             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+        details:last-of-type {
+            border-bottom: none; /* Remove border from last item */
         }
+        /* Remove extra styles when open */
+        /* details[open] { ... } */
 
         summary {
-            padding: 1rem 1.5rem;
+            padding: 1rem 3.5rem 1rem 1rem; /* Adjust padding */
             font-size: 1.125rem; /* text-lg equivalent */
             font-weight: 600; /* Poppins SemiBold */
             color: #1f2937; /* gray-800 */
@@ -85,33 +85,44 @@
             list-style: none; /* Remove default marker */
             position: relative;
             outline: none;
+            transition: background-color 0.2s ease; /* Add hover effect */
+        }
+        summary:hover {
+            background-color: #f9fafb; /* gray-50 */
         }
         summary::-webkit-details-marker { display: none; } /* Hide marker on Chrome/Safari */
         summary::marker { display: none; } /* Hide marker on Firefox */
 
-        /* Add custom marker (e.g., chevron) */
+        /* Updated accordion marker to use Feather icon */
         summary::after {
-            content: '+'; /* Simple plus sign */
+            content: ''; /* Remove text content */
             position: absolute;
-            right: 1.5rem;
+            right: 1rem; /* Adjusted right position */
             top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: #0891b2; /* cyan-600 */
+            transform: translateY(-50%) rotate(0deg); /* Initial rotation */
+            width: 1.25rem; /* Adjust size as needed */
+            height: 1.25rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230891b2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-chevron-down'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
             transition: transform 0.2s ease-in-out;
         }
         details[open] summary::after {
-            content: '−'; /* Minus sign */
-            transform: translateY(-50%);
+            transform: translateY(-50%) rotate(180deg); /* Rotate chevron up */
         }
 
         .faq-answer-content {
-             padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+             padding: 0.5rem 1rem 1.5rem 1rem; /* Adjust padding */
              color: #4b5563; /* gray-600 */
-             border-top: 1px solid #e5e7eb; /* gray-200 */
-             margin-top: 0.5rem;
+             /* Removed border-top, handled by details border */
+             /* margin-top: 0.5rem; */
+             animation: fadeInAnswer 0.3s ease-out; /* Add fade-in for answer */
         }
+         @keyframes fadeInAnswer {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+         }
         
         .faq-answer-content p {
              margin-bottom: 0.75rem;
@@ -130,12 +141,12 @@
              margin-bottom: 0.25rem;
          }
          .faq-answer-content .advice-box { /* Style for specific boxes */
-             border: 2px solid #68ded4; /* Use theme color */
+             border: 1px solid #a5f3fc; /* Light cyan border */
              padding: 1rem;
              display: inline-block;
              margin-top: 1rem;
              border-radius: 0.5rem; /* rounded-lg */
-             background-color: #f0fdfa; /* cyan-50 */
+             background-color: #f0f9ff; /* cyan-50, slightly different shade */
          }
          .faq-answer-content .advice-box h6 {
              font-weight: bold;
@@ -168,18 +179,88 @@
              width: 100%;
              margin-top: 1rem;
              border-collapse: collapse;
+             overflow-x: auto; /* Ensure table scrolls on small screens */
+             display: block; /* Needed for overflow-x */
           }
 
-          /* Chart Styling - Placeholder for visual representation */
+          /* Enhanced Chart Placeholder Styling */
           .chart-placeholder {
-             background-color: #f3f4f6; /* gray-100 */
-             border: 1px dashed #d1d5db; /* gray-300 */
-             padding: 2rem;
-             text-align: center;
-             color: #6b7280; /* gray-500 */
+             background-color: #f9fafb; /* gray-50 */
+             border: 1px solid #e5e7eb; /* gray-200 */
+             padding: 1.5rem;
              border-radius: 0.5rem; /* rounded-lg */
              margin-top: 1rem;
+             position: relative;
+             min-height: 150px; /* Give it some height */
+             display: flex;
+             flex-direction: column;
+             justify-content: space-between;
+             overflow: hidden;
           }
+           .chart-placeholder .chart-title {
+                font-semibold text-gray-700 text-center mb-4;
+           }
+          .chart-placeholder .bar-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: flex-end;
+                height: 100px; /* Height for bars */
+                border-bottom: 2px solid #d1d5db; /* gray-300 - X-axis line */
+                padding-bottom: 5px;
+          }
+          .chart-placeholder .bar {
+                width: 8%; /* Adjust width of bars */
+                background-color: #99f6e4; /* teal-200 */
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                animation: growBar 0.8s ease-out;
+          }
+           @keyframes growBar {
+               from { height: 0; opacity: 0; }
+               to { opacity: 1; }
+           }
+           /* Example: Vary bar heights */
+           .chart-placeholder .bar:nth-child(1) { height: 70%; } /* Jan */
+           .chart-placeholder .bar:nth-child(2) { height: 85%; } /* Feb */
+           .chart-placeholder .bar:nth-child(3) { height: 95%; } /* Mar */
+           .chart-placeholder .bar:nth-child(4) { height: 80%; } /* Apr */
+           .chart-placeholder .bar:nth-child(5) { height: 75%; } /* May */
+           .chart-placeholder .bar:nth-child(6) { height: 60%; } /* Jun */
+           .chart-placeholder .bar:nth-child(7) { height: 55%; } /* Jul */
+           .chart-placeholder .bar:nth-child(8) { height: 50%; } /* Aug */
+           .chart-placeholder .bar:nth-child(9) { height: 45%; } /* Sep */
+           .chart-placeholder .bar:nth-child(10){ height: 55%; } /* Oct */
+           .chart-placeholder .bar:nth-child(11){ height: 65%; } /* Nov */
+           .chart-placeholder .bar:nth-child(12){ height: 70%; } /* Dec */
+
+           .chart-placeholder .chart-note {
+                font-size: 0.875rem; /* text-sm */
+                color: #6b7280; /* gray-500 */
+                text-align: center;
+                margin-top: 0.5rem;
+           }
+           
+           /* Category Heading Icon Style */
+           .category-heading {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem; /* space-x-3 equivalent */
+                color: #111827; /* gray-900 */
+                /* Removed border, handled by section wrapper */
+                padding-bottom: 0.5rem; /* pb-2 */
+                margin-bottom: 1rem; /* mb-4 - reduced */
+           }
+           .category-heading i.feather {
+               width: 1.75rem; /* h-7 */
+               height: 1.75rem; /* w-7 */
+               color: #0e7490; /* cyan-800 */
+           }
+           .category-heading h2 {
+               margin-bottom: 0; /* Override default heading margin */
+               border-bottom: none; /* Remove duplicate border */
+               padding-bottom: 0; /* Remove duplicate padding */
+               color: inherit; /* Inherit color from parent div */
+           }
 
 
     </style>
@@ -194,7 +275,7 @@
                     <!-- Logo -->
                     <div class="flex-shrink-0">
                         <a href="home.html" class="nav-link" data-page="home">
-                            <h1 class="text-2xl font-bold text-gray-900">Eco House <span class="text-cyan-700">Mancora</span></h1>
+                            <h1 class="text-2xl font-bold text-gray-900">La Maison <span class="text-cyan-700">Eco House</span></h1>
                         </a>
                     </div>
 
@@ -208,12 +289,12 @@
                         <a href="restaurant.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="restaurant">Restaurant</a>
                         <a href="location.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="location">Location</a>
                         <a href="contact.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="contact">Contact</a>
-                        <a href="faq.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="faq">FAQ</a> <!-- Added FAQ Link -->
+                        <a href="faq.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="faq">FAQ</a> <!-- Added FAQ Link, set active -->
                     </div>
 
                     <!-- Book Now (Desktop) -->
                     <div class="hidden md:block">
-                        <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                         <a href="#" class="inline-flex items-center px-8 py-2 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out whitespace-nowrap">
                             Book Now
                         </a>
                     </div>
@@ -244,7 +325,7 @@
                     <a href="restaurant.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="restaurant">Restaurant</a>
                     <a href="location.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="location">Location</a>
                     <a href="contact.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="contact">Contact</a>
-                    <a href="faq.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="faq">FAQ</a> <!-- Added FAQ Link -->
+                    <a href="faq.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="faq">FAQ</a> <!-- Added FAQ Link, set active -->
                 </div>
                 <!-- Book Now (Mobile) -->
                 <div class="px-5 py-6">
@@ -277,12 +358,349 @@
             </div>
 
             <!-- Page Content -->
-            <div class="py-20">
-                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    
+            <div class="py-16 md:py-20"> <!-- Reduced top padding slightly -->
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10"> <!-- Added space-y for spacing between sections -->
+                
+                    <!-- General Mancora & Hotel Life Section -->
+                    <div id="general-mancora-faq" class="bg-white rounded-lg shadow-lg p-6 lg:p-8"> <!-- Enhanced section styling -->
+                         <div class="category-heading"> <!-- Wrapper for heading and icon -->
+                             <i data-feather="help-circle"></i>
+                             <h2>General (Mancora & Hotel)</h2>
+                         </div>
+
+                         <details>
+                            <summary>What is the water and air temperature in Máncora?</summary>
+                            <div class="faq-answer-content">
+                                <p>Air and water temperatures vary throughout the year. Here's a general guide:</p>
+                                <!-- Enhanced Visual Chart Placeholder -->
+                                <div class="chart-placeholder">
+                                    <div class="chart-title">Air & Water Temperature Chart (Approx.)</div>
+                                    <div class="bar-container">
+                                        <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                        <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                        <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                        <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                    </div>
+                                    <div class="chart-note">Air: ~27°C-36°C (80°F-97°F) | Water: ~19°C-25°C (66°F-77°F)</div>
+                                </div>
+                                <p class="mt-4">It's generally warm year-round!</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>What clothing should I bring?</summary>
+                            <div class="faq-answer-content">
+                                <p>Casual beachwear is the standard: shorts, t-shirts, flip-flops, swimwear.</p>
+                                <p>Bring a good hoodie or light jacket for cooler evenings, especially during the Peruvian winter months (approx. July-October).</p>
+                                <p>During the summer months (approx. December – April), evenings are warmer, and you likely won't need the hoodie.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>Is Mancora suitable for my non-kitesurfing partner or kids?</summary> <!-- Merged suitability question -->
+                             <div class="faq-answer-content">
+                                <p>Yes, definitely! Mancora and La Maison Eco House offer plenty for everyone.</p>
+                                <p><strong>For Partners/Non-Kiters:</strong> Relax on the beautiful beaches, read by the pool, enjoy spa treatments, practice yoga, go surfing or stand-up paddling, take horse rides, or explore the area with excursions like whale watching (seasonal), diving, or fishing.</p>
+                                <p>Peru is also famous for its food! Explore the diverse restaurants in Mancora, try fresh ceviche (a local specialty), and enjoy the vibrant northern Peruvian cuisine.</p>
+                                <p><strong>For Kids:</strong> Children love the beach and the hotel pool. Depending on their age (typically 13+ recommended for lessons), they can also try learning to surf or kitesurf. Many excursions are family-friendly.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                             <summary>What other activities (non-wind) are available?</summary> <!-- Rephrased Q -->
+                             <div class="faq-answer-content">
+                                <p>Beyond surfing, kitesurfing, and yoga, La Maison Eco House and the surrounding area offer many activities:</p>
+                                <ul>
+                                    <li>Stand-Up Paddling (SUP)</li>
+                                    <li>Diving</li>
+                                    <li>Whale Watching (typically July - October)</li>
+                                    <li>Cooking Lessons</li>
+                                    <li>Spa Treatments & Massages</li>
+                                    <li>Horse Riding on the beach</li>
+                                    <li>Motocross Enduro</li>
+                                </ul>
+                                <p><strong>Day Tours can also be arranged:</strong> Explore mangroves, visit inland natural thermal tubs, take a ceviche tour, paddle with giant sea turtles, go fishing with local fishermen, or enjoy a yacht trip (seasonal).</p>
+                             </div>
+                         </details>
+
+                        <details>
+                             <summary>Is it possible to party in Mancora?</summary>
+                             <div class="faq-answer-content">
+                                <p>Yes, Mancora town has a vibrant nightlife scene with bars and small clubs.</p>
+                                <p>However, La Maison Eco House is located in the quieter Las Pocitas area, offering a choice: you can enjoy a healthy, relaxed retreat vibe, or head into town for more social fun. If you prefer early nights and early mornings, you won't be disturbed by the town's nightlife here. Mancora offers both experiences!</p>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>When is La Maison Eco House open?</summary> <!-- Adapted Q -->
+                            <div class="faq-answer-content">
+                                <p>La Maison Eco House is typically open year-round. Please check our booking system or contact us directly for specific date availability.</p>
+                            </div>
+                         </details>
+                    </div>
+
+                     <!-- Accommodation FAQs -->
+                    <div id="accommodation-faq" class="bg-white rounded-lg shadow-lg p-6 lg:p-8"> <!-- Enhanced section styling -->
+                        <div class="category-heading">
+                            <i data-feather="home"></i>
+                            <h2>Accommodation</h2>
+                        </div>
+                        <details>
+                             <summary>What types of rooms do you offer?</summary>
+                             <div class="faq-answer-content">
+                                 <p>We offer a range of eco-friendly accommodations including Ocean View Suites, Garden Bungalows, Cozy Matrimonial rooms, and stylish shared Eco-Chic Dorms. You can see details on our <a href="accommodation.html" class="text-cyan-700 hover:underline">Accommodation page</a>.</p>
+                             </div>
+                         </details>
+                         <details>
+                              <summary>Is breakfast included?</summary>
+                              <div class="faq-answer-content">
+                                  <p>Yes, a delicious and healthy breakfast served at our on-site restaurant, Nourish, is included for all guests.</p>
+                              </div>
+                          </details>
+                           <details>
+                              <summary>Do the rooms have air conditioning?</summary>
+                              <div class="faq-answer-content">
+                                  <p>Our Ocean View Suites are equipped with air conditioning. Other rooms like the Garden Bungalows and Dorms are designed with natural ventilation and ceiling fans to keep cool, aligning with our eco-conscious philosophy.</p>
+                              </div>
+                          </details>
+                          <details>
+                              <summary>Is there Wi-Fi?</summary>
+                              <div class="faq-answer-content">
+                                  <p>Yes, we offer complimentary high-speed Wi-Fi access for all guests throughout the property.</p>
+                              </div>
+                          </details>
+                        <!-- Add More Accommodation Q&A here later -->
+                    </div>
+
+                    <!-- Surfing & SUP Section -->
+                    <div id="surfing-faq" class="bg-white rounded-lg shadow-lg p-6 lg:p-8"> <!-- Enhanced section styling -->
+                         <div class="category-heading">
+                             <i data-feather="anchor"></i> <!-- Using anchor for surf -->
+                             <h2>Surfing & Stand Up Paddleboarding</h2>
+                         </div>
+                        
+                        <details>
+                            <summary>What are the surf conditions like in Mancora?</summary>
+                            <div class="faq-answer-content">
+                                <p>The Peruvian North Shore is world-famous for its consistent swells and long, tidy waves. Mancora receives both North and South swells throughout the year, offering a wide variety of conditions suitable for different levels.</p>
+                                <p>From the famous long point breaks to gentler waves perfect for learning, there's something for everyone. Key spots nearby include Mancora Point (walking distance!), Lobitos, Cabo Blanco, El Ñuro, and many more.</p>
+                                <p>Water temperature is warm year-round (approx. 20-25°C / 68-77°F), usually requiring only boardshorts or a light top.</p>
+                            </div>
+                        </details>
+
+                        <details>
+                            <summary>Is La Maison Eco House suitable for all levels of surfers?</summary>
+                            <div class="faq-answer-content">
+                                <p>Yes! We welcome everyone, whether you're a complete beginner wanting to catch your first wave or an experienced shredder looking for perfect point breaks. Our location provides easy access to Mancora's main break, which offers different sections suitable for various levels depending on the swell.</p>
+                                <p>We offer lessons for beginners, coaching (including video analysis) for intermediates and advanced surfers, and guided trips to explore the diverse breaks along the coast.</p>
+                            </div>
+                        </details>
+                        
+                        <details>
+                            <summary>What surf services are offered?</summary>
+                            <div class="faq-answer-content">
+                                <p>Through our expert partners based right here, we offer a complete surf experience:</p>
+                                <ul>
+                                    <li><strong>Lessons:</strong> For beginners learning the basics and intermediates improving technique.</li>
+                                    <li><strong>Coaching:</strong> Advanced coaching for experienced surfers, often including video analysis.</li>
+                                    <li><strong>Guided Surf Trips:</strong> Daily excursions to explore other famous breaks on the North Shore like Lobitos, Cabo Blanco, etc., with local guides.</li>
+                                    <li><strong>Surf Camps:</strong> Immersive packages combining accommodation at La Maison Eco House, meals, lessons/coaching, and sometimes yoga.</li>
+                                    <li><strong>Board Rentals:</strong> A wide selection of boards (soft-tops, longboards, funboards, shortboards) available on-site.</li>
+                                </ul>
+                                <p>You can add lessons, rentals, or inquire about trips and camps when booking your stay or upon arrival.</p>
+                            </div>
+                        </details>
+                        
+                        <details>
+                            <summary>What about Stand Up Paddleboarding (SUP)?</summary>
+                            <div class="faq-answer-content">
+                                <p>Stand Up Paddleboarding (SUP) is a fantastic, accessible water activity, great for fitness, exploring, or just relaxing on the water. It combines balance, strength, and endurance.</p>
+                                <p>We offer various SUP experiences:</p>
+                                <ul>
+                                    <li><strong>Initiation/Lessons:</strong> Learn the basics of paddling and balance.</li>
+                                    <li><strong>Mancora Bay Cruises:</strong> Paddle along the coast, see the fisherman's pier, and explore towards Las Pocitas.</li>
+                                    <li><strong>SUP Yoga:</strong> Take your yoga practice onto the water for a unique challenge.</li>
+                                    <li><strong>Tours with Turtles:</strong> Guided morning paddles to areas where you can often see giant sea turtles.</li>
+                                    <li><strong>SUP Surfing:</strong> For those looking to catch waves on a paddleboard.</li>
+                                </ul>
+                                <p><strong>Rentals:</strong> Both cruising and surfing SUPs are available for rent by the session or the day.</p>
+                            </div>
+                        </details>
+                    </div>
+
+                    <!-- Kitesurfing Section -->
+                    <div id="kitesurfing-faq" class="bg-white rounded-lg shadow-lg p-6 lg:p-8"> <!-- Enhanced section styling -->
+                         <div class="category-heading">
+                            <i data-feather="wind"></i>
+                            <h2>Kitesurfing</h2>
+                        </div>
+                        
+                        <details>
+                            <summary>When is the best time/wind season for kitesurfing in Northern Peru?</summary> <!-- Rephrased Q -->
+                            <div class="faq-answer-content">
+                                <p>The main wind season here in Northern Peru (Mancora, Lobitos area) is generally from <strong>mid-April to mid-January</strong>.</p>
+                                <p>Peru offers year-round wind options, with the South (Paracas) having its best season from November to April.</p>
+                                <p>Our season in the far north (April – December) offers excellent wind statistics. Wind reliability might decrease slightly towards the end of December/early January due to summer conditions.</p>
+                                <!-- Enhanced Visual Chart Placeholder -->
+                                <div class="chart-placeholder">
+                                    <div class="chart-title">Wind Consistency Chart (Approx.)</div>
+                                     <div class="bar-container">
+                                         <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                         <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                         <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                         <div class="bar"></div> <div class="bar"></div> <div class="bar"></div>
+                                    </div>
+                                    <div class="chart-note">(Strongest & most consistent winds typically Jul - Nov)</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <details>
+                             <summary>What are the wind statistics like on the North Shore?</summary> <!-- Rephrased Q -->
+                             <div class="faq-answer-content">
+                                 <p>The region offers fantastic wind reliability during the season (April-December). If participating in day trips to various spots along the coast, the chance of riding is extremely high (often cited above 98%).</p>
+                                 <p>The wind typically comes from the southwest, starting around midday (12 PM) and lasting until late afternoon (around 5 PM).</p>
+                                 <p>Directly in Mancora town, the statistics might be slightly lower (perhaps 4-5 days a week on average), but it remains a great spot, especially for foiling, potentially allowing you to kitesurf almost every day.</p>
+                             </div>
+                         </details>
+
+                        <details>
+                            <summary>When is the best season for kitesurfing waves?</summary>
+                             <div class="faq-answer-content">
+                                <p>Since the wind is reliable for much of the year (April-December), the main variable for wave kiting becomes the swell.</p>
+                                <p>During Peru's Austral Winter (roughly May-November), we receive consistent South and Southwest ground swells originating from the South Pacific, often with long periods (up to 22 seconds), which create quality waves.</p>
+                                <p><strong>Ground Swell vs. Wind Swell:</strong> Ground swells travel longer distances, resulting in more organized, powerful, and tidy waves compared to local wind swells.</p>
+                                <p><strong>Swell Statistics:</strong> Generally, <strong>May-July</strong> and <strong>October-November</strong> often see the best swell conditions. Wind strength typically increases from August onwards.</p>
+                                <p>However, great wave sessions can occur throughout the season. April-June is also a favorite for many, as the water is still warm, and it marks the beginning of the season. The Peruvian North Shore offers a great combination of wind and waves, and periods with absolutely no waves are rare and usually short-lived.</p>
+                                <div class="advice-box">
+                                     <h6>Advice for Wave Riders:</h6>
+                                     <p>1. Come anytime during the main wind season (April-December, perhaps avoiding late Dec/early Jan if waves are the sole focus).</p>
+                                     <p>2. A longer stay (10-14 days) increases your chances of catching good swells.</p>
+                                     <p>3. If flexible, monitor swell forecasts 1-2 weeks out to potentially time your trip.</p>
+                                </div>
+                             </div>
+                         </details>
+                        
+                         <details>
+                            <summary>What size kites should I bring?</summary>
+                            <div class="faq-answer-content">
+                                <p><strong>Standard Sizes:</strong> For the Peruvian North Shore, a common standard size is a <strong>9m</strong> for a ~75kg (165lb) rider and a <strong>7m</strong> for a ~60kg (130lb) rider.</p>
+                                <p><strong>Ideal Quiver:</strong> Bringing 2 kites is better, and 3 is ideal to cover the range.</p>
+                                <p><strong>Recommendations for a 2-Kite Quiver:</strong></p>
+                                <ul>
+                                    <li><strong>May to August:</strong> Consider bringing a size larger than your standard kite (e.g., 11m or 12m if your standard is 9m, but generally not bigger than 13m unless you are a heavier rider).</li>
+                                    <li><strong>September to October:</strong> Consider bringing a size smaller than your standard kite (e.g., 7m if your standard is 9m).</li>
+                                    <li><strong>November to December:</strong> Conditions can be variable; sizes like 7m, 9m, and 12m are often used.</li>
+                                </ul>
+                                <p>Don't want to travel heavy? La Maison Eco House offers premium gear rentals on-site!</p>
+                            </div>
+                         </details>
+
+                         <details>
+                             <summary>What wetsuit do I need?</summary>
+                             <div class="faq-answer-content">
+                                <p>Water temperature varies slightly through the year (see temperature question). During the Austral winter (approx. May – November), the water in Mancora is typically warm enough (around 20-23°C / 68-73°F) that many riders are comfortable without a wetsuit or just use a light top.</p>
+                                <p>However, if participating in kite trips to southern spots impacted by the Humboldt current, the water can be cooler (down to 18°C / 64°F), and a <strong>3/2mm full suit</strong> is recommended.</p>
+                                <p>During the warmer months (approx. December - April), water temperatures are higher, and a wetsuit is generally not needed.</p>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>What else should I bring (booties, leash, helmet, etc.)?</summary>
+                            <div class="faq-answer-content">
+                                <p><strong>Reef Booties:</strong> Most surfers and kitesurfers do not wear booties here, especially when launching directly from our sandy beach area in Las Pocitas. However, if you plan to explore other spots or prefer protection, feel free to bring them.</p>
+                                <p><strong>Surf/Kiteboard Leash:</strong> Recommended if you plan on wave riding, especially at more advanced spots.</p>
+                                <p><strong>Helmet:</strong> While not mandatory or commonly used by all, a helmet is always a good safety measure, especially when learning or pushing your limits. Most incidents involve contact with the board.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>Is Mancora and the area good for foiling?</summary>
+                            <div class="faq-answer-content">
+                                <p>Yes, absolutely. The water deepens fairly quickly just off the shore, providing ample depth for foiling throughout the bay. You can launch from near La Maison Eco House and explore upwind towards the main point break or glide near the pier.</p>
+                            </div>
+                         </details>
+
+                         <details>
+                            <summary>Is Mancora a good place for kiteboarding beginners?</summary>
+                            <div class="faq-answer-content">
+                                <p>Yes, Mancora is generally a good place for beginners, and lessons are offered right here.</p>
+                                <p><strong>Pros:</strong></p>
+                                <ul>
+                                    <li>The typical side-onshore wind direction is considered the safest for learning.</li>
+                                    <li>The wind is generally very consistent during the season.</li>
+                                    <li>The beaches are wide and sandy, with fewer crowds than many international spots.</li>
+                                </ul>
+                                <p><strong>Potential Drawback:</strong> When large swells hit the coast (which can happen occasionally, maybe a few days a month during swell season), there isn't always a perfectly sheltered flat-water spot nearby. Lessons might need to be rescheduled if waves become too large (e.g., above shoulder high).</p>
+                            </div>
+                         </details>
+
+                         <details>
+                             <summary>Is wave kitesurfing safe in Peru?</summary>
+                             <div class="faq-answer-content">
+                                <p>Yes, the Peruvian North Shore wave spots are considered very safe compared to many other destinations, thanks to:</p>
+                                <ul>
+                                    <li>Mainly sandy bottoms and beaches.</li>
+                                    <li>Absence of sharks or other major hazards.</li>
+                                    <li>Predominantly side-onshore or side-shore winds at most spots (few offshore spots).</li>
+                                    <li>Steady, clean wind conditions.</li>
+                                    <li>Typically medium-sized waves (rarely exceeding 2 meters / 6-8 feet, except on exceptional swell days).</li>
+                                    <li>Experienced local guides and schools prioritizing safety (offering support, rescue, first aid).</li>
+                                </ul>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>What are the requirements for joining guided kite trips/safaris?</summary>
+                             <div class="faq-answer-content">
+                                <p>Guided wave trips cater to both experienced wave riders and those looking to get started in waves.</p>
+                                <p>However, participants need solid general kite control. You should be comfortable and able to:</p>
+                                <ul>
+                                    <li>Ride consistently upwind.</li>
+                                    <li>Perform basic jumps.</li>
+                                    <li>Ride toeside.</li>
+                                    <li>Body drag upwind to recover your board.</li>
+                                    <li>Know self-rescue procedures (a refresher can be provided).</li>
+                                </ul>
+                             </div>
+                         </details>
+
+                         <details>
+                            <summary>Can freeriders or freestylers join the kite trips?</summary>
+                             <div class="faq-answer-content">
+                                <p>While the focus of many trips is wave riding due to the quality of the spots, freeriders and freestylers are absolutely welcome! There's plenty of space outside the main wave breaks to practice jumps or simply cruise.</p>
+                             </div>
+                         </details>
+
+                    </div>
+
+                    <!-- Other Activities FAQs (Yoga Specific) -->
+                     <div id="other-activities-faq" class="bg-white rounded-lg shadow-lg p-6 lg:p-8"> <!-- Enhanced section styling -->
+                         <div class="category-heading">
+                            <i data-feather="smile"></i> <!-- Using smile for general activities -->
+                            <h2>Other Activities (Yoga, etc.)</h2>
+                         </div>
+                         <details>
+                             <summary>What kind of yoga classes do you offer?</summary>
+                             <div class="faq-answer-content">
+                                 <p>We typically offer daily classes like energizing Morning Vinyasa flows and relaxing Sunset Yin/Restorative sessions, perfect for complementing surfing or kiting. Styles may vary based on our resident and guest instructors. Check our <a href="yoga.html" class="text-cyan-700 hover:underline">Yoga page</a> for more details.</p>
+                             </div>
+                         </details>
+                         <details>
+                              <summary>Are the yoga classes suitable for beginners?</summary>
+                              <div class="faq-answer-content">
+                                  <p>Yes, our classes are generally suitable for all levels, and our instructors provide modifications. Whether you're new to yoga or an experienced practitioner, you'll find a welcoming environment in our ocean-view shala.</p>
+                              </div>
+                          </details>
+                         <!-- Add More Yoga/Other Q&A here later -->
+                    </div>
+
                     <!-- Travel Information Section -->
-                    <div id="travel" class="mb-16">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">Travel Information</h2>
+                    <div id="travel" class="bg-white rounded-lg shadow-lg p-6 lg:p-8"> <!-- Enhanced section styling -->
+                         <div class="category-heading">
+                             <i data-feather="map-pin"></i>
+                             <h2>Travel Information</h2>
+                         </div>
 
                         <!-- Accordion Items -->
                         <details>
@@ -352,7 +770,7 @@
                                          </tbody>
                                      </table>
                                 </div>
-                                <p class="mt-4 text-sm italic">Taxi prices are approximate and subject to change. Eco House Mancora can help arrange trusted airport transfers.</p>
+                                <p class="mt-4 text-sm italic">Taxi prices are approximate and subject to change. La Maison Eco House can help arrange trusted airport transfers.</p>
                             </div>
                          </details>
 
@@ -367,9 +785,9 @@
                          </details>
 
                         <details>
-                             <summary>How do I get to Eco House Mancora from the airport?</summary> <!-- Rephrased Q -->
+                             <summary>How do I get to La Maison Eco House from the airport?</summary> <!-- Rephrased Q -->
                             <div class="faq-answer-content">
-                                <p>The easiest way is by taxi. <strong>Eco House Mancora can organize a trusted taxi transfer for you upon request.</strong> Alternatively, you can find official taxis inside the airport terminals (refer to the approximate prices in the airport question above).</p>
+                                <p>The easiest way is by taxi. <strong>La Maison Eco House can organize a trusted taxi transfer for you upon request.</strong> Alternatively, you can find official taxis inside the airport terminals (refer to the approximate prices in the airport question above).</p>
                                 <p><strong>Taxi Sharing Tip:</strong> You might be able to share a taxi by finding other passengers heading to Mancora or asking drivers outside the terminal ("Quiero compartir taxi"), potentially reducing the cost.</p>
                                 <p><strong>Other Options (Less Recommended):</strong></p>
                                 <ul>
@@ -397,221 +815,14 @@
                         </details>
 
                     </div>
-                    
-                    <!-- Kitesurfing Section -->
-                    <div id="kitesurfing-faq" class="mb-16">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">Kitesurfing</h2>
-                        
-                        <details>
-                            <summary>When is the best time/wind season for kitesurfing in Northern Peru?</summary> <!-- Rephrased Q -->
-                            <div class="faq-answer-content">
-                                <p>The main wind season here in Northern Peru (Mancora, Lobitos area) is generally from <strong>mid-April to mid-January</strong>.</p>
-                                <p>Peru offers year-round wind options, with the South (Paracas) having its best season from November to April.</p>
-                                <p>Our season in the far north (April – December) offers excellent wind statistics. Wind reliability might decrease slightly towards the end of December/early January due to summer conditions.</p>
-                                <!-- Placeholder for Wind Chart -->
-                                <div class="chart-placeholder">
-                                    <p class="font-semibold">Wind Chart Placeholder</p>
-                                    <p>(Indicates strongest, most consistent winds typically July - November)</p>
-                                </div>
-                            </div>
-                        </details>
 
-                        <details>
-                             <summary>What are the wind statistics like on the North Shore?</summary> <!-- Rephrased Q -->
-                             <div class="faq-answer-content">
-                                 <p>The region offers fantastic wind reliability during the season (April-December). If participating in day trips to various spots along the coast, the chance of riding is extremely high (often cited above 98%).</p>
-                                 <p>The wind typically comes from the southwest, starting around midday (12 PM) and lasting until late afternoon (around 5 PM).</p>
-                                 <p>Directly in Mancora town, the statistics might be slightly lower (perhaps 4-5 days a week on average), but it remains a great spot, especially for foiling, potentially allowing you to kitesurf almost every day.</p>
-                             </div>
-                         </details>
-
-                        <details>
-                            <summary>When is the best season for kitesurfing waves?</summary>
-                             <div class="faq-answer-content">
-                                <p>Since the wind is reliable for much of the year (April-December), the main variable for wave kiting becomes the swell.</p>
-                                <p>During Peru's Austral Winter (roughly May-November), we receive consistent South and Southwest ground swells originating from the South Pacific, often with long periods (up to 22 seconds), which create quality waves.</p>
-                                <p><strong>Ground Swell vs. Wind Swell:</strong> Ground swells travel longer distances, resulting in more organized, powerful, and tidy waves compared to local wind swells.</p>
-                                <p><strong>Swell Statistics:</strong> Generally, <strong>May-July</strong> and <strong>October-November</strong> often see the best swell conditions. Wind strength typically increases from August onwards.</p>
-                                <p>However, great wave sessions can occur throughout the season. April-June is also a favorite for many, as the water is still warm, and it marks the beginning of the season. The Peruvian North Shore offers a great combination of wind and waves, and periods with absolutely no waves are rare and usually short-lived.</p>
-                                <div class="advice-box">
-                                     <h6>Advice for Wave Riders:</h6>
-                                     <p>1. Come anytime during the main wind season (April-December, perhaps avoiding late Dec/early Jan if waves are the sole focus).</p>
-                                     <p>2. A longer stay (10-14 days) increases your chances of catching good swells.</p>
-                                     <p>3. If flexible, monitor swell forecasts 1-2 weeks out to potentially time your trip.</p>
-                                </div>
-                             </div>
-                         </details>
-                        
-                         <details>
-                            <summary>What size kites should I bring?</summary>
-                            <div class="faq-answer-content">
-                                <p><strong>Standard Sizes:</strong> For the Peruvian North Shore, a common standard size is a <strong>9m</strong> for a ~75kg (165lb) rider and a <strong>7m</strong> for a ~60kg (130lb) rider.</p>
-                                <p><strong>Ideal Quiver:</strong> Bringing 2 kites is better, and 3 is ideal to cover the range.</p>
-                                <p><strong>Recommendations for a 2-Kite Quiver:</strong></p>
-                                <ul>
-                                    <li><strong>May to August:</strong> Consider bringing a size larger than your standard kite (e.g., 11m or 12m if your standard is 9m, but generally not bigger than 13m unless you are a heavier rider).</li>
-                                    <li><strong>September to October:</strong> Consider bringing a size smaller than your standard kite (e.g., 7m if your standard is 9m).</li>
-                                    <li><strong>November to December:</strong> Conditions can be variable; sizes like 7m, 9m, and 12m are often used.</li>
-                                </ul>
-                                <p>Don't want to travel heavy? Eco House Mancora offers premium gear rentals on-site!</p>
-                            </div>
-                         </details>
-
-                         <details>
-                             <summary>What wetsuit do I need?</summary>
-                             <div class="faq-answer-content">
-                                <p>Water temperature varies slightly through the year (see temperature question). During the Austral winter (approx. May – November), the water in Mancora is typically warm enough (around 20-23°C / 68-73°F) that many riders are comfortable without a wetsuit or just use a light top.</p>
-                                <p>However, if participating in kite trips to southern spots impacted by the Humboldt current, the water can be cooler (down to 18°C / 64°F), and a <strong>3/2mm full suit</strong> is recommended.</p>
-                                <p>During the warmer months (approx. December - April), water temperatures are higher, and a wetsuit is generally not needed.</p>
-                             </div>
-                         </details>
-
-                         <details>
-                            <summary>What else should I bring (booties, leash, helmet, etc.)?</summary>
-                            <div class="faq-answer-content">
-                                <p><strong>Reef Booties:</strong> Most surfers and kitesurfers do not wear booties here, especially when launching directly from our sandy beach area in Las Pocitas. However, if you plan to explore other spots or prefer protection, feel free to bring them.</p>
-                                <p><strong>Surf/Kiteboard Leash:</strong> Recommended if you plan on wave riding, especially at more advanced spots.</p>
-                                <p><strong>Helmet:</strong> While not mandatory or commonly used by all, a helmet is always a good safety measure, especially when learning or pushing your limits. Most incidents involve contact with the board.</p>
-                            </div>
-                         </details>
-
-                         <details>
-                            <summary>Is Mancora and the area good for foiling?</summary>
-                            <div class="faq-answer-content">
-                                <p>Yes, absolutely. The water deepens fairly quickly just off the shore, providing ample depth for foiling throughout the bay. You can launch from near Eco House and explore upwind towards the main point break or glide near the pier.</p>
-                            </div>
-                         </details>
-
-                         <details>
-                            <summary>Is Mancora a good place for kiteboarding beginners?</summary>
-                            <div class="faq-answer-content">
-                                <p>Yes, Mancora is generally a good place for beginners, and lessons are offered right here.</p>
-                                <p><strong>Pros:</strong></p>
-                                <ul>
-                                    <li>The typical side-onshore wind direction is considered the safest for learning.</li>
-                                    <li>The wind is generally very consistent during the season.</li>
-                                    <li>The beaches are wide and sandy, with fewer crowds than many international spots.</li>
-                                </ul>
-                                <p><strong>Potential Drawback:</strong> When large swells hit the coast (which can happen occasionally, maybe a few days a month during swell season), there isn't always a perfectly sheltered flat-water spot nearby. Lessons might need to be rescheduled if waves become too large (e.g., above shoulder high).</p>
-                            </div>
-                         </details>
-
-                         <details>
-                             <summary>Is wave kitesurfing safe in Peru?</summary>
-                             <div class="faq-answer-content">
-                                <p>Yes, the Peruvian North Shore wave spots are considered very safe compared to many other destinations, thanks to:</p>
-                                <ul>
-                                    <li>Mainly sandy bottoms and beaches.</li>
-                                    <li>Absence of sharks or other major hazards.</li>
-                                    <li>Predominantly side-onshore or side-shore winds at most spots (few offshore spots).</li>
-                                    <li>Steady, clean wind conditions.</li>
-                                    <li>Typically medium-sized waves (rarely exceeding 2 meters / 6-8 feet, except on exceptional swell days).</li>
-                                    <li>Experienced local guides and schools prioritizing safety (offering support, rescue, first aid).</li>
-                                </ul>
-                             </div>
-                         </details>
-
-                         <details>
-                            <summary>What are the requirements for joining guided kite trips/safaris?</summary>
-                             <div class="faq-answer-content">
-                                <p>Guided wave trips cater to both experienced wave riders and those looking to get started in waves.</p>
-                                <p>However, participants need solid general kite control. You should be comfortable and able to:</p>
-                                <ul>
-                                    <li>Ride consistently upwind.</li>
-                                    <li>Perform basic jumps.</li>
-                                    <li>Ride toeside.</li>
-                                    <li>Body drag upwind to recover your board.</li>
-                                    <li>Know self-rescue procedures (a refresher can be provided).</li>
-                                </ul>
-                             </div>
-                         </details>
-
-                         <details>
-                            <summary>Can freeriders or freestylers join the kite trips?</summary>
-                             <div class="faq-answer-content">
-                                <p>While the focus of many trips is wave riding due to the quality of the spots, freeriders and freestylers are absolutely welcome! There's plenty of space outside the main wave breaks to practice jumps or simply cruise.</p>
-                             </div>
-                         </details>
-
-                    </div>
-
-                    <!-- General Mancora & Hotel Life Section -->
-                    <div id="general-mancora-faq" class="mb-16">
-                         <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">General Questions (Mancora & Hotel)</h2>
-
-                         <details>
-                            <summary>What is the water and air temperature in Máncora?</summary>
-                            <div class="faq-answer-content">
-                                <p>Air and water temperatures vary throughout the year. Here's a general guide:</p>
-                                <!-- Placeholder for Temp Chart -->
-                                <div class="chart-placeholder">
-                                    <p class="font-semibold">Air & Water Temperature Chart Placeholder</p>
-                                    <p>Air: Generally ranges from ~27°C/80°F (Sept) to ~36°C/97°F (Feb/Mar).</p>
-                                    <p>Water: Generally ranges from ~19°C/66°F (Sept) to ~25°C/77°F (Feb).</p>
-                                    <p>(See specific chart for monthly details if available)</p>
-                                </div>
-                                <p>It's generally warm year-round!</p>
-                            </div>
-                         </details>
-
-                         <details>
-                            <summary>What clothing should I bring?</summary>
-                            <div class="faq-answer-content">
-                                <p>Casual beachwear is the standard: shorts, t-shirts, flip-flops, swimwear.</p>
-                                <p>Bring a good hoodie or light jacket for cooler evenings, especially during the Peruvian winter months (approx. July-October).</p>
-                                <p>During the summer months (approx. December – April), evenings are warmer, and you likely won't need the hoodie.</p>
-                            </div>
-                         </details>
-
-                         <details>
-                            <summary>Is Mancora suitable for my non-kitesurfing partner or kids?</summary> <!-- Merged suitability question -->
-                             <div class="faq-answer-content">
-                                <p>Yes, definitely! Mancora and Eco House offer plenty for everyone.</p>
-                                <p><strong>For Partners/Non-Kiters:</strong> Relax on the beautiful beaches, read by the pool, enjoy spa treatments, practice yoga, go surfing or stand-up paddling, take horse rides, or explore the area with excursions like whale watching (seasonal), diving, or fishing.</p>
-                                <p>Peru is also famous for its food! Explore the diverse restaurants in Mancora, try fresh ceviche (a local specialty), and enjoy the vibrant northern Peruvian cuisine.</p>
-                                <p><strong>For Kids:</strong> Children love the beach and the hotel pool. Depending on their age (typically 13+ recommended for lessons), they can also try learning to surf or kitesurf. Many excursions are family-friendly.</p>
-                            </div>
-                         </details>
-
-                         <details>
-                             <summary>What other activities (non-wind) are available?</summary> <!-- Rephrased Q -->
-                             <div class="faq-answer-content">
-                                <p>Beyond surfing, kitesurfing, and yoga, Eco House Mancora and the surrounding area offer many activities:</p>
-                                <ul>
-                                    <li>Stand-Up Paddling (SUP)</li>
-                                    <li>Diving</li>
-                                    <li>Whale Watching (typically July - October)</li>
-                                    <li>Cooking Lessons</li>
-                                    <li>Spa Treatments & Massages</li>
-                                    <li>Horse Riding on the beach</li>
-                                    <li>Motocross Enduro</li>
-                                </ul>
-                                <p><strong>Day Tours can also be arranged:</strong> Explore mangroves, visit inland natural thermal tubs, take a ceviche tour, paddle with giant sea turtles, go fishing with local fishermen, or enjoy a yacht trip (seasonal).</p>
-                                <!-- Link might need updating -->
-                                <!-- <p>See all our experiences <a href="#" class="text-cyan-700 hover:underline">here</a>.</p> -->
-                             </div>
-                         </details>
-
-                        <details>
-                             <summary>Is it possible to party in Mancora?</summary>
-                             <div class="faq-answer-content">
-                                <p>Yes, Mancora town has a vibrant nightlife scene with bars and small clubs.</p>
-                                <p>However, Eco House Mancora is located in the quieter Las Pocitas area, offering a choice: you can enjoy a healthy, relaxed retreat vibe, or head into town for more social fun. If you prefer early nights and early mornings, you won't be disturbed by the town's nightlife here. Mancora offers both experiences!</p>
-                             </div>
-                         </details>
-
-                         <details>
-                            <summary>When is Eco House Mancora open?</summary> <!-- Adapted Q -->
-                            <div class="faq-answer-content">
-                                <p>Eco House Mancora is typically open year-round. However, kitesurfing activities and rentals through our partners are primarily available during the main wind season (approx. mid-April to mid-January). Please contact us to confirm availability for specific dates or activities outside the main season.</p>
-                            </div>
-                         </details>
-
-                    </div>
 
                     <!-- Booking & Payment Section -->
-                     <div id="booking-payment-faq" class="mb-16">
-                        <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b pb-2">Booking & Payment</h2>
+                     <div id="booking-payment-faq" class="bg-white rounded-lg shadow-lg p-6 lg:p-8"> <!-- Enhanced section styling -->
+                         <div class="category-heading">
+                             <i data-feather="credit-card"></i>
+                             <h2>Booking & Payment</h2>
+                         </div>
 
                         <details>
                             <summary>How do I book my stay or activities?</summary> <!-- Adapted Q -->
@@ -671,7 +882,7 @@
                         </details>
 
                          <details>
-                             <summary>How can I pay at Eco House Mancora?</summary> <!-- Adapted Q -->
+                             <summary>How can I pay at La Maison Eco House?</summary> <!-- Adapted Q -->
                             <div class="faq-answer-content">
                                 <p>Our prices are typically quoted in US Dollars (USD) for clarity. You can usually settle your final bill using USD or Peruvian Soles (PEN). We use fair, current exchange rates if converting between currencies. Please confirm accepted payment methods (cash, card, transfer) when booking.</p>
                             </div>
@@ -682,7 +893,7 @@
                             <div class="faq-answer-content">
                                 <p>Exchanging currency at Lima's airport upon arrival is convenient but often offers poor rates. Airport taxis usually accept USD.</p>
                                 <p>If spending time in Lima, exchange rates are generally better there. Use official exchange houses ("Casas de Cambio") rather than street money changers for better security and rates.</p>
-                                <p>In Mancora, you can exchange USD at banks or authorized exchange points. Eco House staff can advise on reliable options.</p>
+                                <p>In Mancora, you can exchange USD at banks or authorized exchange points. La Maison Eco House staff can advise on reliable options.</p>
                             </div>
                         </details>
 
@@ -696,10 +907,8 @@
 
                      </div>
 
-                     <!-- Add other sections/categories as needed -->
-
                      <!-- Still need help? Contact CTA -->
-                     <div class="mt-20 text-center bg-white p-8 rounded-xl shadow-lg border-t-4 border-cyan-600">
+                     <div class="text-center bg-white rounded-lg shadow-lg p-8 border-t-4 border-cyan-600">
                           <h2 class="text-2xl font-bold text-gray-900 mb-4">Still Have Questions?</h2>
                           <p class="text-lg text-gray-600 mb-6">If you can't find the answer you're looking for, please don't hesitate to reach out to us directly.</p>
                            <a href="contact.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
@@ -718,7 +927,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- About -->
                 <div>
-                    <h3 class="text-lg font-bold text-white mb-4">Eco House Mancora</h3>
+                    <h3 class="text-lg font-bold text-white mb-4">La Maison Eco House</h3>
                     <p class="text-sm">Your eco-friendly home for surf, kitesurf, and yoga in the heart of Peru's northern coast. Adventure and relaxation await.</p>
                     <p class="text-sm mt-4 flex items-start">
                         <i data-feather="heart" class="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0" style="margin-top: 0.125rem;"></i>
@@ -769,7 +978,7 @@
             </div>
             <!-- Bottom Bar -->
             <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
-                <p>&copy; <span id="current-year"></span> Eco House Mancora. All rights reserved.</p>
+                <p>&copy; <span id="current-year"></span> La Maison Eco House. All rights reserved.</p>
             </div>
         </div>
     </footer>
