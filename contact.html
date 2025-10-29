@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Eco House Mancora</title> <!-- Updated Title -->
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter (body) and Poppins (headings) fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet">
+    <!-- Load Feather Icons -->
+    <script src="https://unpkg.com/feather-icons" defer></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Apply Poppins to headings */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+         main section .font-black { /* Banner headings */
+             font-weight: 900;
+         }
+         main h2, footer h3 { /* Section titles */
+            font-weight: 700;
+         }
+         main h3, main h4 { /* Card/item titles */
+            font-weight: 600;
+         }
+
+        /* Active nav link style */
+        .nav-link.active, .nav-link-mobile.active {
+            color: #0c4a6e; /* Tailwind cyan-900 */
+            font-weight: 500;
+        }
+         .nav-link-mobile.active {
+             background-color: #f0f9ff; /* cyan-50 */
+         }
+
+        /* Hero text shadow for readability */
+        .hero-text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Mobile menu transition */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Fade in animation for page content */
+        main > section {
+             animation: fadeIn 0.4s ease-out;
+        }
+         @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Netlify form success/error message styling */
+         .form-feedback {
+             margin-top: 1rem;
+             padding: 1rem;
+             border-left-width: 4px;
+             border-radius: 0.5rem; /* rounded-xl */
+         }
+         .form-feedback.success {
+             background-color: #d1fae5; /* green-100 */
+             border-color: #10b981; /* green-500 */
+             color: #065f46; /* green-700 */
+         }
+         .form-feedback.error {
+             background-color: #fee2e2; /* red-100 */
+             border-color: #ef4444; /* red-500 */
+             color: #b91c1c; /* red-700 */
+         }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800"> <!-- Changed default bg -->
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-md sticky top-0 z-50 w-full">
+        <nav>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20">
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="home.html" class="nav-link" data-page="home">
+                            <h1 class="text-2xl font-bold text-gray-900">Eco House <span class="text-cyan-700">Mancora</span></h1>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation - Links updated -->
+                    <div class="hidden md:flex md:items-center md:space-x-6">
+                        <a href="home.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="home">Home</a>
+                        <a href="accommodation.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="accommodation">Accommodation</a>
+                        <a href="surf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="surf">Surf</a>
+                        <a href="kitesurf.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="kitesurf">Kitesurf</a>
+                        <a href="yoga.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="yoga">Yoga</a>
+                        <a href="restaurant.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="restaurant">Restaurant</a>
+                        <a href="location.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium" data-page="location">Location</a>
+                        <a href="contact.html" class="nav-link text-gray-600 hover:text-cyan-700 px-3 py-2 rounded-md text-sm font-medium active" data-page="contact">Contact</a>
+                    </div>
+
+                    <!-- Book Now (Desktop) -->
+                    <div class="hidden md:block">
+                        <a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                            Book Now
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
+                            <svg id="hamburger-icon" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu - Links updated -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg fixed top-20 left-0 w-full h-[calc(100vh-80px)] overflow-y-auto transform -translate-x-full z-40">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <a href="home.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="home">Home</a>
+                    <a href="accommodation.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="accommodation">Accommodation</a>
+                    <a href="surf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="surf">Surf</a>
+                    <a href="kitesurf.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="kitesurf">Kitesurf</a>
+                    <a href="yoga.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="yoga">Yoga</a>
+                    <a href="restaurant.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="restaurant">Restaurant</a>
+                    <a href="location.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50" data-page="location">Location</a>
+                    <a href="contact.html" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-cyan-700 hover:bg-gray-50 active" data-page="contact">Contact</a>
+                </div>
+                <!-- Book Now (Mobile) -->
+                <div class="px-5 py-6">
+                    <a href="#" class="block w-full text-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition duration-150 ease-in-out">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- =================== -->
+        <!-- CONTACT PAGE (REVAMPED) -->
+        <!-- =================== -->
+        <section id="contact" class="bg-gray-50"> 
+            <!-- Page Banner -->
+            <div class="relative bg-gray-900 h-48 md:h-64 flex items-center justify-center text-center text-white overflow-hidden">
+                <img src="https://placehold.co/1600x400/3b82f6/FFFFFF?text=Contact" 
+                     loading="lazy"
+                     onerror="this.src='https://placehold.co/1600x400/333/FFF?text=Image+Missing'"
+                     alt="Desk with phone and email icons" 
+                     class="absolute inset-0 w-full h-full object-cover opacity-50">
+                <div class="relative z-10 p-4">
+                    <h2 class="text-4xl md:text-5xl font-black hero-text-shadow uppercase tracking-wider">
+                        Get in Touch
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Page Content -->
+            <div class="py-20">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Introduction with FAQ Link -->
+                    <p class="text-xl text-center text-gray-600 max-w-3xl mx-auto -mt-4 mb-8">
+                        Have questions? We're here to help. Send us a message, and our team will get back to you as soon as possible.
+                    </p>
+                    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-16">
+                         Planning your trip? Check our detailed <a href='faq.html#travel' class='text-cyan-700 hover:underline font-medium'>Travel Guide & FAQ</a> for answers to common travel questions.
+                    </p>
+
+                    <!-- START: NEW "How Can We Help?" Highlights -->
+                    <div class="mb-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center max-w-6xl mx-auto">
+                        <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg">
+                            <i data-feather="calendar" class="w-10 h-10 text-cyan-700 mb-3"></i>
+                            <h4 class="text-lg font-semibold text-gray-800 mb-1">Booking & Availability</h4>
+                            <p class="text-gray-600 text-sm">Check dates, room types, prices, and make reservations.</p>
+                        </div>
+                         <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg">
+                             <i data-feather="send" class="w-10 h-10 text-cyan-700 mb-3"></i>
+                             <h4 class="text-lg font-semibold text-gray-800 mb-1">Airport Transfers</h4>
+                             <p class="text-gray-600 text-sm">Arrange reliable transportation to and from the airport.</p>
+                         </div>
+                         <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg">
+                             <i data-feather="anchor" class="w-10 h-10 text-cyan-700 mb-3"></i> <!-- Used anchor as a general activity icon -->
+                             <h4 class="text-lg font-semibold text-gray-800 mb-1">Activities & Lessons</h4>
+                             <p class="text-gray-600 text-sm">Inquire about surf/kite lessons, yoga, rentals, and trips.</p>
+                         </div>
+                         <div class="flex flex-col items-center p-6 bg-white rounded-xl shadow-lg">
+                              <i data-feather="help-circle" class="w-10 h-10 text-cyan-700 mb-3"></i>
+                             <h4 class="text-lg font-semibold text-gray-800 mb-1">General Questions</h4>
+                             <p class="text-gray-600 text-sm">Ask us anything else about your stay or Mancora.</p>
+                         </div>
+                     </div>
+                    <!-- END: NEW "How Can We Help?" Highlights -->
+
+                    <!-- Contact Form & Info Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+                        <!-- Contact Form (Takes up 2 columns on large screens) -->
+                        <div class="lg:col-span-2">
+                             <h2 class="text-3xl font-bold text-gray-900 mb-6">Send Us a Message</h2>
+                             <form id="contact-form-main" name="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="bg-white p-8 rounded-xl shadow-lg">
+                                 <input type="hidden" name="form-name" value="contact-form" />
+                                 <p class="hidden">
+                                     <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                                 </p>
+                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                     <div>
+                                         <label for="first-name" class="block text-sm font-medium text-gray-700">First Name</label>
+                                         <input type="text" name="first-name" id="first-name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500">
+                                     </div>
+                                     <div>
+                                         <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                                         <input type="text" name="last-name" id="last-name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500">
+                                     </div>
+                                     <div class="sm:col-span-2">
+                                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                         <input type="email" name="email" id="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500">
+                                     </div>
+                                     <div class="sm:col-span-2">
+                                         <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                                         <textarea id="message" name="message" rows="5" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-cyan-500 focus:border-cyan-500"></textarea>
+                                     </div>
+                                 </div>
+                                 <button type="submit" class="mt-6 w-full inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-xl text-white bg-cyan-700 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500">
+                                     Send Message
+                                 </button>
+                                 <!-- Feedback message area -->
+                                 <div id="form-feedback-message" class="mt-4"></div> 
+                             </form>
+                        </div>
+                        
+                        <!-- Contact Info (Takes up 1 column on large screens) -->
+                        <div class="space-y-8 mt-4 lg:mt-0">
+                            <h2 class="text-3xl font-bold text-gray-900 mb-6">Contact Details</h2>
+                            <!-- Phone -->
+                            <div class="flex items-start">
+                                 <i data-feather="phone" class="w-7 h-7 text-cyan-700 mr-4 flex-shrink-0 mt-1"></i>
+                                 <div>
+                                     <h3 class="text-xl font-semibold text-gray-900">Phone & WhatsApp</h3>
+                                     <a href="https://wa.me/51941324784" target="_blank" rel="noopener noreferrer" class="text-lg text-gray-600 hover:text-cyan-700 block">+51 941 324 784</a>
+                                     <span class="text-sm text-gray-500">(Click to chat!)</span>
+                                 </div>
+                            </div>
+                             <!-- Email -->
+                            <div class="flex items-start">
+                                 <i data-feather="mail" class="w-7 h-7 text-cyan-700 mr-4 flex-shrink-0 mt-1"></i>
+                                 <div>
+                                     <h3 class="text-xl font-semibold text-gray-900">Email</h3>
+                                     <a href="mailto:aloha@wildkiteperu.com" class="text-lg text-gray-600 hover:text-cyan-700 break-words">aloha@wildkiteperu.com</a>
+                                 </div>
+                            </div>
+                             <!-- Addresses -->
+                            <div class="flex items-start">
+                                 <i data-feather="map-pin" class="w-7 h-7 text-cyan-700 mr-4 flex-shrink-0 mt-1"></i>
+                                 <div>
+                                     <h3 class="text-xl font-semibold text-gray-900 mb-2">Visit Us</h3>
+                                     <div class="mb-3">
+                                         <strong class="font-medium text-gray-800 block">ECO SURF CAMP:</strong>
+                                         <p class="text-lg text-gray-600">La Maison (atrás del hotel La Posada)<br>La Quebrada Cabo Blanco – Máncora</p>
+                                     </div>
+                                     <div>
+                                         <strong class="font-medium text-gray-800 block">BEACH KITE CLUB:</strong>
+                                         <p class="text-lg text-gray-600">Misfit Hotel – Playa del Amor<br>Las Pocitas – Máncora</p>
+                                     </div>
+                                     <!-- Small Map Placeholder -->
+                                     <div class="bg-gray-200 rounded-lg shadow-md h-48 mt-4 flex items-center justify-center text-gray-500 overflow-hidden">
+                                          <!-- Mini Map Iframe -->
+                                          <iframe 
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.136030999081!2d-81.06683568573196!3d-4.08868614749666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x90344f6f8f7c9e8d%3A0x2f9f8e4e9f7c9e8d!2sEco%20House%20Mancora!5e0!3m2!1sen!2sus!4v1678886400000!5m2!1sen!2sus" 
+                                            width="100%" 
+                                            height="100%" 
+                                            style="border:0;" 
+                                            allowfullscreen="" 
+                                            loading="lazy" 
+                                            referrerpolicy="no-referrer-when-downgrade"
+                                            title="Eco House Mancora Mini Map">
+                                        </iframe>
+                                     </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer - Links updated -->
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-bold text-white mb-4">Eco House Mancora</h3>
+                    <p class="text-sm">Your eco-friendly home for surf, kitesurf, and yoga in the heart of Peru's northern coast. Adventure and relaxation await.</p>
+                    <p class="text-sm mt-4 flex items-start">
+                        <i data-feather="heart" class="w-4 h-4 mr-2 text-cyan-400 flex-shrink-0" style="margin-top: 0.125rem;"></i>
+                        <span>We proudly donate 1% of our benefits to Ocean Protection NGO's.</span>
+                    </p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="accommodation.html" class="nav-link text-sm hover:text-white" data-page="accommodation">Accommodation</a></li>
+                        <li><a href="restaurant.html" class="nav-link text-sm hover:text-white" data-page="restaurant">Restaurant</a></li>
+                        <li><a href="location.html" class="nav-link text-sm hover:text-white" data-page="location">Location</a></li>
+                        <li><a href="faq.html" class="nav-link text-sm hover:text-white" data-page="faq">FAQ</a></li> <!-- Added FAQ link -->
+                    </ul>
+                </div>
+                <!-- Experiences -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Experiences</h3>
+                    <ul class="space-y-2">
+                        <li><a href="surf.html" class="nav-link text-sm hover:text-white" data-page="surf">Surf</a></li>
+                        <li><a href="kitesurf.html" class="nav-link text-sm hover:text-white" data-page="kitesurf">Kitesurf</a></li>
+                        <li><a href="yoga.html" class="nav-link text-sm hover:text-white" data-page="yoga">Yoga</a></li>
+                    </ul>
+                </div>
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase mb-4">Connect</h3>
+                    <ul class="space-y-2">
+                        <li><a href="contact.html" class="nav-link text-sm hover:text-white" data-page="contact">Contact Us</a></li>
+                        <!-- Social Icons -->
+                        <li class="flex items-center space-x-3 pt-1"> 
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Instagram</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.067-.06-1.407-.06-4.123v-.08c0-2.643.012-2.987.06-4.043.049 1.064.218 1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white">
+                                <span class="sr-only">Facebook</span>
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"/></svg>
+                            </a>
+                        </li>
+                         <li class="pt-2">
+                             <span class="text-sm text-cyan-200">Tripadvisor Travellers' Choice</span>
+                             <!-- Tripadvisor Placeholder -->
+                         </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div class="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
+                <p>&copy; <span id="current-year"></span> Eco House Mancora. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- =================== -->
+    <!-- JAVASCRIPT LOGIC   -->
+    <!-- =================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Menu Toggle Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            function openMobileMenu() {
+                if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.remove('hidden', '-translate-x-full');
+                    mobileMenu.classList.add('translate-x-0');
+                    hamburgerIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
+            }
+
+            function closeMobileMenu() {
+                 if(mobileMenu && hamburgerIcon && closeIcon && mobileMenuButton) {
+                    mobileMenu.classList.add('-translate-x-full');
+                    mobileMenu.classList.remove('translate-x-0');
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300); // Wait for transition
+                    hamburgerIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                 }
+            }
+
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const isMenuOpen = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    if (isMenuOpen) {
+                        closeMobileMenu();
+                    } else {
+                        openMobileMenu();
+                    }
+                });
+            } else {
+                console.error("Mobile menu button not found.");
+            }
+
+             // --- Mobile Nav Link Click Logic ---
+            const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenuButton && mobileMenuButton.getAttribute('aria-expanded') === 'true') {
+                        closeMobileMenu();
+                    }
+                });
+            });
+
+            // --- Set Active Nav Link Based on URL ---
+            const currentPage = window.location.pathname.split('/').pop() || 'home.html'; 
+            const pageName = currentPage.replace('.html', ''); 
+            
+            const desktopLinks = document.querySelectorAll('header .hidden.md\\:flex a.nav-link');
+            const mobileLinks = document.querySelectorAll('#mobile-menu a.nav-link-mobile');
+
+            function setActiveLink(links) {
+                links.forEach(link => {
+                    const linkPage = link.dataset.page;
+                    // Highlight if the link's data-page matches the current page name
+                    if (linkPage === pageName || (pageName === 'home' && linkPage === 'home') ) { 
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+            setActiveLink(desktopLinks);
+            setActiveLink(mobileLinks);
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if(currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+            
+            // Initialize Feather Icons
+            function initializeFeatherIcons() {
+                try {
+                    if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                        feather.replace();
+                    } else {
+                        setTimeout(() => {
+                             if (typeof feather !== 'undefined' && feather !== null && typeof feather.replace === 'function') { 
+                                 feather.replace();
+                             } else {
+                                  console.error("Feather icons library (feather) not loaded after delay.");
+                             }
+                        }, 500);
+                    }
+                } catch (e) {
+                    console.error("Feather icons failed to initialize:", e);
+                }
+            }
+            
+            initializeFeatherIcons(); // Call it once on load
+
+            // --- Netlify Form Logic ---
+            const netlifyForm = document.querySelector('form[data-netlify="true"]');
+            const feedbackDiv = document.getElementById('form-feedback-message'); // Get feedback div
+
+            if (netlifyForm && feedbackDiv) {
+                 netlifyForm.addEventListener('submit', (e) => {
+                     e.preventDefault();
+                     const formData = new FormData(netlifyForm);
+                     const submitButton = netlifyForm.querySelector('button[type="submit"]'); 
+                     if(submitButton) submitButton.disabled = true; 
+                     feedbackDiv.innerHTML = ''; // Clear previous messages
+
+                     fetch('/', {
+                         method: 'POST',
+                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                         body: new URLSearchParams(formData).toString()
+                     }).then(() => {
+                         // Use Tailwind classes via style for success message
+                         feedbackDiv.className = 'form-feedback success'; // Apply success style
+                         feedbackDiv.innerHTML = `<p class="font-semibold">Message Sent!</p><p>Thanks, we'll get back to you soon.</p>`;
+                         netlifyForm.reset(); // Clear the form
+                         if(submitButton) submitButton.disabled = false; // Re-enable button? Or keep disabled? Let's re-enable.
+                     }).catch((error) => {
+                         feedbackDiv.className = 'form-feedback error'; // Apply error style
+                         feedbackDiv.textContent = 'Oops! Something went wrong submitting the form. Please try again or contact us directly.';
+                         console.error('Form submission error:', error); 
+                         if(submitButton) submitButton.disabled = false; // Re-enable button on error
+                     });
+                 });
+            } else {
+                 if (!netlifyForm) console.warn("Netlify form element not found.");
+                 if (!feedbackDiv) console.warn("Form feedback message element not found.");
+            }
+
+        });
+    </script>
+
+</body>
+</html>
